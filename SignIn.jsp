@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 페이지</title>
-    <link rel="stylesheet" type="text/css" href="Css/Index.css">
+    <link rel="stylesheet" type="text/css" href="Css/SignIn.css">
 
 </head>
 
@@ -19,29 +19,31 @@
 
             <div id="Index_InputBox_Container">
 
-                <input type="text" placeholder="아이디" id="Index_Input_Id">
-                <input type="password" placeholder="비밀번호" id="Index_Input_Pw"> 
+                <input type="text" placeholder="이름" maxlength="8" id="Index_Input_Name">
+                <input type="text" placeholder="아이디" maxlength="20" id="Index_Input_Id">
+                <input type="password" placeholder="비밀번호" maxlength="20" id="Index_Input_Pw">
+                <input type="password" placeholder="비밀번호 확인" maxlength="20" id="Index_Input_Pwcheck">
+                <input type="text" placeholder="전화번호" maxlength="12" id="Index_Input_Phonenumber">
+                
+                <div id="Index_RadioButtonBox_container">
+                    <input type="radio" name="position" id="Index_Member_Btn" checked><label for="Index_Member_Btn">팀원</lable>
+                    <input type="radio" name="position" id="Index_Leader_Btn"><label for="Index_Leader_Btn">팀장</lable> 
+                </div>
 
             </div>
 
             <div id="Index_InButtonBox_Container">
 
-                    <input type="button" id="Index_Button_LogIn" value="로그인">
-                    <%-- <button id="Index_Button_LogIn" onclick="loginEvent()">로그인</button> --%>
-                    <a href=""><button id="Index_Button_SignIn">회원 가입</button></a>
+                    <input type="button" id="Index_Button_SignIn" value="회원가입">
+
             </div>        
 
-            <div id="Index_FindButtonBox_Container">
 
-                <a><button id="Index_Button_FineId">아이디 찾기</button></a>
-                <a><button id="Index_Button_FindPw">비밀번호 찾기</button></a>
-
-            </div>
 
         </div>
           
     </main>
 
-    <script src="Js/Index.js"></script>
+    <script src="Js/SignIn.js"></script>
 </body>
 </html>
