@@ -14,7 +14,7 @@ table tr th {
 }
 
 table tr td {
-    height: 90px;
+    height: 110px;
 }
 
 table tr th:nth-child(1),table tr td:nth-child(1) {

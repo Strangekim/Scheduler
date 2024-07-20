@@ -13,6 +13,9 @@
 </head>
 
 <body>
+
+    <header></header>
+
     <div id="Schedule_Scheduler_Container">
 
         <table border="1" id="Schedule_MainSchedule_Table">
