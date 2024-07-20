@@ -6,7 +6,13 @@ var inputPwCheck = document.getElementById("Index_Input_Pwcheck");
 var inputPhone = document.getElementById("Index_Input_Phonenumber");
 var SignInBtn = document.getElementById("Index_Button_SignIn");
 
+// 정규표현식
+
+var regKor = /^[가-힣]+$/;
+
 var regPhone = /^\d{2,3}\d{3,4}\d{4}$/;
+
+// 회원가입 버튼 비활성화
 
 SignInBtn.disabled = true;
 
@@ -21,7 +27,17 @@ inputName.onblur = function(e) {
     if (inputName.value === ''){
         inputName.style.borderColor = "red"
         inputName.placeholder = "이름을 입력해주세요!"
-    } 
+    }
+    
+    if (!regKor.test(inputName.value)){
+        inputName.value = "";
+        inputName.style.borderColor = "red";
+        inputName.placeholder = "한글만 입력해주세요";
+    } else {
+        inputName.style.borderColor = "black";
+    }
+
+    checkInputValue();
 }
 
 // 아이디 예외 처리
@@ -38,6 +54,8 @@ inputId.onblur = function(e) {
     } else {
             inputId.style.borderColor = "black"
     }
+
+    checkInputValue();
 }
 
 // 비밀번호 예외 처리
@@ -73,6 +91,8 @@ inputPw.onblur = function(e) {
          inputPwCheck.style.borderColor = "black"
      }
 
+    checkInputValue();
+
 }
 
 
@@ -87,6 +107,8 @@ inputPwCheck.onblur = function(e) {
         inputPwCheck.style.borderColor = "black"
         inputPwCheck.placeholder = "비밀번호 확인"
     }
+
+    checkInputValue();
 }
 
 
@@ -103,5 +125,28 @@ inputPhone.onblur = function(e) {
         inputPhone.style.borderColor = "red"
     } else if (regPhone.test(inputPhone.value) == true) {
         inputPhone.style.borderColor = "black"
+    }
+
+    checkInputValue();
+}
+
+
+// 조건 검증 및 회원가입 버튼 활성화 함수
+
+function checkInputValue () {
+    var checkValue = inputName.value !== "" 
+    && inputId.value !== "" 
+    && inputPw.value !== "" 
+    && inputPw.value == inputPwCheck.value 
+    && regPhone.test(inputPhone.value);
+
+    SignInBtn.disabled = !checkValue;
+
+    // 회원가입 placeholder 에 명시해줄지???
+    
+    if(checkValue) {
+        console.log(0)
+    } else {
+        console.log(1)
     }
 }

@@ -1,0 +1,57 @@
+* {
+    font-size: 17px;
+}
+
+::placeholder {
+    text-align: center;
+}
+
+#Index_Main_Container {
+    background-color: dimgrey;
+    width: 25%;
+    height: 500px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 30px;
+    display: flex;
+}
+
+#Index_Sub_Container {
+    width: 85%;
+    height: 85%;
+    margin: auto;
+    margin-top: 25%;
+    
+}
+
+#Index_InputBox_Container {
+    margin-top: 7px;
+}
+
+#Index_Input_Name, #Index_Input_PhoneNumber, #Index_Button_FindId {
+    width: 98%;
+    height: 50px;
+    margin-top: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+
+
+#Index_InButtonBox_Container {
+    margin-top: 40px;
+}
+
+#Index_Button_FindId {
+    background-color: cornflowerblue;
+}
+
+#Index_Button_SignIn {
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    background-color: bisque;
+    margin-bottom: 5px;
+}
+
+
