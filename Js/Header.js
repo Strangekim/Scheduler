@@ -29,7 +29,7 @@ border-radius: 7px;
 display: flex;
 `;
 
-console.log(getHeader)
+// console.log(getHeader)
 
 
 // 좌측 홈 로고 버튼 생성
@@ -48,7 +48,7 @@ width: 50%;
 height: 100%;
 `;
 
-console.log(getLogoHeader)
+// console.log(getLogoHeader)
 
 // 좌측 임시 로고 버튼 생성
 

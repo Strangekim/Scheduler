@@ -69,4 +69,21 @@ function createCalenderDate () {
 
 createCalenderDate();
 
-console.log(scheduleTable)
+// console.log(scheduleTable)
+
+
+
+// 월 선택 페이지 컨트롤
+
+const selectMonthContainer = document.getElementById("Schedule_SelectMonth_Container");
+
+// selectMonthContainer.style.display ="none";
+
+function viewMonthSelectEvent() {
+    selectMonthContainer.style.display ="";
+};
+
+selectMonthContainer.onclick = function(e) {
+    console.log(1)
+}
+

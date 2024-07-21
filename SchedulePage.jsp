@@ -18,12 +18,46 @@
 
     <div id="Schedule_Scheduler_Container">
 
+        <div id="Schedule_SelectMonth_Container">
+
+            <button id="Schedule_SelectMonthClose_Btn">x</button>
+
+            <table>
+                
+                <tr>
+                    <th colspan="6">
+                        <button>2024</button>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th><button>1</button></th>
+                    <th><button>2</button></th>
+                    <th><button>3</button></th>
+                    <th><button>4</button></th>
+                    <th><button>5</button></th>
+                    <th><button>6</button></th>                 
+                </tr>
+
+                <tr>
+                    <th><button>7</button></th>
+                    <th><button>8</button></th>
+                    <th><button>9</button></th>
+                    <th><button>10</button></th>
+                    <th><button>11</button></th>
+                    <th><button>12</button></th>                 
+                </tr>
+
+
+            </table>
+        </div>
+
         <table border="1" id="Schedule_MainSchedule_Table">
 
             <tr>
                 <th colspan="7">
                     <button>&lt;</button>
-                    <button id="Schedule_ViewNow_Button"></button>
+                    <button onClick="viewMonthSelectEvent()" id="Schedule_ViewNow_Button"></button>
                     <button>&gt;</button>
                 </th>
             </tr>
@@ -37,6 +71,7 @@
                 <th>금</th>
                 <th>토</th>
             </tr>
+
 
         </table>
     </div>
