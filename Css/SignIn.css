@@ -24,6 +24,7 @@
     width: 85%;
     height: 85%;
     margin: auto;
+    margin-top: 20px;
     /* background-color: aqua; */
     
 }
@@ -35,25 +36,48 @@
 #Index_Input_Id, #Index_Input_Pw, #Index_Input_Name, #Index_Input_Pwcheck, #Index_Input_Phonenumber {
     width: 98%;
     height: 50px;
-    margin-top: 12px;
+    margin-top: 7px;
     border-radius: 12px;
     text-align: center;
 }
 
 #Index_RadioButtonBox_container {
+    width: 98%;
+    height: 50px;
+    margin-top: 12px;
+    border-radius: 12px;
+    /* background-color: cadetblue; */
     display: flex;
+    justify-content: space-between;
 }
 
-#Index_Member_Btn, #Index_Leader_Btn {
+
+.Index_RadioButton_Container {
+    width: 48%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.Index_RadioButton_Container input {
     display: none;
 }
 
+.Index_RadioButton_Container label {
+    display: block;
+    height: 50px;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-input[type=radio]+label {
+
+ input[type=radio]+label {
 
     cursor: pointer;
 
-    border: 1px solid #333;
+    border: 1px solid #5a5656;
     text-align: center;
 
 }
@@ -61,17 +85,17 @@ input[type=radio]+label {
 input[type=radio]+label {
 
     background-color: #fff;
-    color: #333;
+    color: black;
 }
 
 input[type=radio]:checked+label{
-    background-color: #333;
+    background-color: #5a5656;
     color: #fff;
 }
 
 
 #Index_InButtonBox_Container {
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 #Index_Button_SignIn {

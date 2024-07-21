@@ -26,8 +26,12 @@
                 <input type="text" placeholder="전화번호" maxlength="12" id="Index_Input_Phonenumber">
                 
                 <div id="Index_RadioButtonBox_container">
-                    <input type="radio" name="position" id="Index_Member_Btn" checked><label for="Index_Member_Btn">팀원</lable>
-                    <input type="radio" name="position" id="Index_Leader_Btn"><label for="Index_Leader_Btn">팀장</lable> 
+                    <div class="Index_RadioButton_Container">
+                        <input type="radio" name="position" id="Index_Member_Btn" checked><label for="Index_Member_Btn">팀원</lable>
+                    </div>
+                    <div class="Index_RadioButton_Container">
+                        <input type="radio" name="position" id="Index_Leader_Btn"><label for="Index_Leader_Btn">팀장</lable>
+                    </div> 
                 </div>
 
             </div>
