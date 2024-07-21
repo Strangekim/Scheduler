@@ -1,0 +1,63 @@
+* {
+    font-size: 17px;
+}
+
+/* :placeholder-shown {
+    color: red;
+} */
+
+::placeholder {
+    text-align: center;
+}
+
+#Index_Main_Container {
+    background-color: dimgrey;
+    width: 25%;
+    height: 500px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 30px;
+    display: flex;
+}
+
+#Index_Sub_Container {
+    width: 85%;
+    height: 85%;
+    margin: auto;
+    /* background-color: aqua; */
+    
+}
+
+#Index_InputBox_Container {
+    margin-top: 7px;
+}
+
+#Index_Input_Id, #Index_Input_Pw {
+    width: 98%;
+    height: 65px;
+    margin-top: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+
+#Index_InButtonBox_Container {
+    margin-top: 40px;
+}
+
+#Index_Button_LogIn, #Index_Button_SigIn {
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    background-color: bisque;
+    margin-bottom: 5px;
+}
+
+#Index_Button_FineId, #Index_Button_FindPw {
+    width: 49%;
+    height: 40px;
+    border-radius: 12px;
+    background-color: bisque;
+    font-size: 13px;
+}
+
