@@ -42,6 +42,7 @@
     </div>
 
     <script src="Js/SchedulePage.js"></script>
+    <script src="Js/Header.js"></script>
 
 </body>
 </html>

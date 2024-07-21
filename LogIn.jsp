@@ -13,6 +13,9 @@
 </head>
 
 <body>
+
+    <%-- <header id="Main_Header"></header> --%>
+
     <main id="Index_Main_Container">
 
         <div id="Index_Sub_Container">
@@ -27,13 +30,13 @@
             <div id="Index_InButtonBox_Container">
 
                     <input type="button" id="Index_Button_LogIn" value="로그인">
-                    <a href=""><button id="Index_Button_SigIn">회원 가입</button></a>
+                    <a href="SignIn.jsp"><button id="Index_Button_SigIn">회원 가입</button></a>
             </div>        
 
             <div id="Index_FindButtonBox_Container">
 
-                <a><button id="Index_Button_FineId">아이디 찾기</button></a>
-                <a><button id="Index_Button_FindPw">비밀번호 찾기</button></a>
+                <a href="FindId.jsp"><button id="Index_Button_FineId">아이디 찾기</button></a>
+                <a href="FindPw.jsp"><button id="Index_Button_FindPw">비밀번호 찾기</button></a>
 
             </div>
 
@@ -42,5 +45,6 @@
     </main>
 
     <script src="Js/LogIn.js"></script>
+    <script src="Js/Header.js"></script>
 </body>
 </html>

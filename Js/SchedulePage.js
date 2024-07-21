@@ -56,7 +56,7 @@ function createCalenderDate () {
             let createTd = document.createElement("td")
             createTd.setAttribute("class", "Schedule_ScheduleDate_Td")
             createTd.textContent = scheduleDates[i * 7 + j];
-            createTr.append(createTd);
+            createTr.appendChild(createTd);
 
             let createDiv = document.createElement("div")
             createTd.appendChild(createDiv);

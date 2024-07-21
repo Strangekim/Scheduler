@@ -35,5 +35,6 @@
     </main>
 
     <script src="Js/FindId.js"></script>
+    <script src="Js/Header.js"></script>
 </body>
 </html>
