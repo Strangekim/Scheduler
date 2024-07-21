@@ -1,0 +1,82 @@
+#DatePage_Main_Container {
+    margin: auto;
+    margin-top: 10px;
+    width: 70%;
+    border-radius: 15%;
+    border: 15px solid rgb(134, 241, 241);
+    height: 80vh;
+}
+
+#DatePage_Main_MenuContainer {
+    width: 100%;
+    height: 150px;
+    border-bottom: 10px solid rgb(134, 241, 241);
+    display: flex;
+    justify-content: space-around;
+}
+
+#DatePage_Main_MenuContainer div:nth-child(1),#DatePage_Main_MenuContainer div:nth-child(3) {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#DatePage_Today_Btn, #DatePage_Write_Btn {
+    background-color: gray;
+    height: 40%;
+    color: white;
+    width: 80%;
+    border-radius: 10px;
+    margin: auto;
+}
+
+#DatePage_Main_MenuContainer div:nth-child(2) {
+    width: 50%;
+    display: flex;
+    /* background-color: rgb(43, 226, 134); */
+}
+
+
+#DatePage_Main_MenuContainer div:nth-child(2) button {
+    background-color: cornflowerblue;
+    /* width: 32%; */
+    height: 70%;
+    margin: auto;
+    font-size: 30px;
+}
+
+#DatePage_Main_MenuContainer div:nth-child(2) button:nth-child(1), #DatePage_Main_MenuContainer div:nth-child(2) button:nth-child(3) {
+    width: 20%;
+}
+
+#DatePage_DateSelect_Btn {
+    width: 50%;
+}
+
+
+
+#DatePage_Schedule_Container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: cornflowerblue;
+    height: 100px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+#DatePage_Schedule_Container div {
+    display: flex;
+    /* background-color: burlywood; */
+    justify-content: space-between;
+}
+
+#DatePage_Schedule_Container div button {
+    background-color: gray;
+    color: white;
+}
+
