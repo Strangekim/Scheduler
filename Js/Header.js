@@ -54,6 +54,8 @@ height: 100%;
 
 const createLogoButton = document.createElement("button")
 
+createLogoButton.setAttribute("id", "Header_Logo_Btn")
+
 createLogoButton.innerHTML = "로고"
 createLogoButton.style.cssText = 
 `
@@ -162,6 +164,11 @@ function headerBtnDisplay () {
 if (window.location.pathname == "/scheduler/LogIn.jsp") {
     createButtonsDiv.style.display = "none";
 
+    createLogoButton.onclick = function () {
+        console.log(createLogoButton)
+        window.location.href= 'LogIn.jsp'
+    }
+
     // 회원가입, ID 비밀번호 찾기
 } else if (window.location.pathname == "/scheduler/SignIn.jsp"
     || window.location.pathname == "/scheduler/FindId.jsp"
@@ -176,6 +183,13 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
         window.location.href= 'LogIn.jsp'
     }
 
+    createLogoButton.onclick = function () {
+        console.log(createLogoButton)
+        window.location.href= 'LogIn.jsp'
+    }
+
+    
+
     // 스케줄 페이지
 } else if (window.location.pathname == "/scheduler/SchedulePage.jsp") {
     createThirdButtons.style.display = "none";
@@ -187,6 +201,13 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
         window.location.href= 'MyPage.jsp'
     }
 
+    createLogoButton.onclick = function () {
+        console.log(createLogoButton)
+        window.location.href= 'SchedulePage.jsp'
+    }
+    
+    // 일일 페이지
+
 } else if (window.location.pathname == "/scheduler/DatePage.jsp"
     || window.location.pathname == "/scheduler/MyPage.jsp"){
     createThirdButtons.style.display = "none";
@@ -195,6 +216,13 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
     createSecondButtons.value = "HOME"
 
     createSecondButtons.onclick = function () {
+        window.location.href= 'SchedulePage.jsp'
+    }
+
+
+
+    createLogoButton.onclick = function () {
+        console.log(createLogoButton)
         window.location.href= 'SchedulePage.jsp'
     }
 
