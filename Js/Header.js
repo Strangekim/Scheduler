@@ -69,13 +69,137 @@ getLogoHeader.appendChild(createLogoButton)
 
 const createButtonsDiv = document.createElement("div")
 
+createButtonsDiv.setAttribute("id", "Header_Btn_Div")
+
 createButtonsDiv.style.cssText = 
 `
 width: 50%;
 height: 100%;
 border-radius: 7px;
-background-color: pink;
+display: flex;
+flex-direction: row-reverse;
 `
 getHeader.appendChild(createButtonsDiv)
 
-const createButtons = document.createElement("button")
+console.log(window.location.pathname)
+
+
+
+// 첫번째 버튼 추가
+
+const createFirstButtons = document.createElement("input")
+
+createFirstButtons.setAttribute("id", "Header_BtnStyle_Btn")
+
+
+createFirstButtons.type = "button"
+
+
+createFirstButtons.style.cssText = 
+`
+width: 100px;
+height: 50%;
+margin-top: 20px;
+margin-right: 3%;
+border-radius: 7px;
+background-color: gray;
+color: white;
+`
+
+
+createButtonsDiv.appendChild(createFirstButtons)
+
+// 두번째 버튼 추가
+
+const createSecondButtons = document.createElement("input")
+
+createSecondButtons.setAttribute("id", "Header_BtnStyle_Btn")
+
+
+createSecondButtons.type = "button"
+createSecondButtons.style.cssText = 
+`
+width: 100px;
+height: 50%;
+margin-top: 20px;
+margin-right: 3%;
+border-radius: 7px;
+background-color: gray;
+color: white;
+`
+
+
+createButtonsDiv.appendChild(createSecondButtons)
+
+// 세번째 버튼 추가
+
+const createThirdButtons = document.createElement("input")
+
+createThirdButtons.setAttribute("id", "Header_BtnStyle_Btn")
+
+
+createThirdButtons.type = "button"
+createThirdButtons.style.cssText = 
+`
+width: 100px;
+height: 50%;
+margin-top: 20px;
+margin-right: 3%;
+border-radius: 7px;
+background-color: gray;
+color: white;
+`
+
+
+createButtonsDiv.appendChild(createThirdButtons)
+
+
+// 경로에 따라 나올 버튼 선택
+function headerBtnDisplay () {
+
+
+    // 로그인 페이지
+if (window.location.pathname == "/scheduler/LogIn.jsp") {
+    createButtonsDiv.style.display = "none";
+
+    // 회원가입, ID 비밀번호 찾기
+} else if (window.location.pathname == "/scheduler/SignIn.jsp"
+    || window.location.pathname == "/scheduler/FindId.jsp"
+    || window.location.pathname == "/scheduler/FindPw.jsp"
+) {
+    createSecondButtons.style.display = "none";
+    createThirdButtons.style.display = "none";
+
+    createFirstButtons.value = "로그인"
+
+    createFirstButtons.onclick = function () {
+        window.location.href= 'LogIn.jsp'
+    }
+
+    // 스케줄 페이지
+} else if (window.location.pathname == "/scheduler/SchedulePage.jsp") {
+    createThirdButtons.style.display = "none";
+
+    createFirstButtons.value = "로그아웃"
+    createSecondButtons.value = "마이페이지"
+
+    createSecondButtons.onclick = function () {
+        window.location.href= 'MyPage.jsp'
+    }
+
+} else if (window.location.pathname == "/scheduler/DatePage.jsp"
+    || window.location.pathname == "/scheduler/MyPage.jsp"){
+    createThirdButtons.style.display = "none";
+
+    createFirstButtons.value = "로그아웃"
+    createSecondButtons.value = "HOME"
+
+    createSecondButtons.onclick = function () {
+        window.location.href= 'SchedulePage.jsp'
+    }
+
+    }
+};
+
+
+headerBtnDisplay();

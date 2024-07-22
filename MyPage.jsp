@@ -20,9 +20,10 @@
             <div id="Index_InputBox_Container">
 
                 <input type="text" placeholder="아이디" maxlength="20" id="Index_Input_Id">
+                <input type="text" placeholder="전화번호" maxlength="12" id="Index_Input_Phonenumber">
                 <input type="password" placeholder="비밀번호" maxlength="20" id="Index_Input_Pw">
                 <input type="password" placeholder="비밀번호 확인" maxlength="20" id="Index_Input_Pwcheck">
-                <input type="text" placeholder="전화번호" maxlength="12" id="Index_Input_Phonenumber">
+
                 
                 <div id="Index_RadioButtonBox_container">
                     <div class="Index_RadioButton_Container">
