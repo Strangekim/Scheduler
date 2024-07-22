@@ -24,7 +24,7 @@
     width: 85%;
     height: 85%;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 40px;
     /* background-color: aqua; */
     
 }
@@ -97,10 +97,11 @@ input[type=radio]:checked+label{
 #Index_InButtonBox_Container {
     margin-top: 10px;
     display: flex;
+    justify-content: space-around;
 }
 
 #Index_InButtonBox_Container input {
-    width: 100%;
+    width: 48%;
     height: 50px;
     border-radius: 12px;
     background-color: bisque;

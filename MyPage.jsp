@@ -48,7 +48,7 @@
           
     </main>
 
-    <script src="Js/SignIn.js"></script>
+    <script src="Js/MyPage.js"></script>
     <script src="Js/Header.js"></script>
 </body>
 </html>
