@@ -13,8 +13,7 @@
 </head>
 
 <body>
-
-    <header></header>
+    
 
     <div id="Schedule_Scheduler_Container">
 
@@ -23,6 +22,10 @@
             <button id="Schedule_SelectMonthClose_Btn">x</button>
 
             <table>
+
+                <th colspan="6">
+                    <input type="month">
+                </th>
                 
                 <tr>
                     <th colspan="6">

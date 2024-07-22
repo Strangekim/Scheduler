@@ -4,7 +4,7 @@
     width: 70%;
     border-radius: 15%;
     border: 15px solid rgb(134, 241, 241);
-    height: 80vh;
+    min-height: 100vh;
 }
 
 #DatePage_Main_MenuContainer {
@@ -78,5 +78,46 @@
 #DatePage_Schedule_Container div button {
     background-color: gray;
     color: white;
+}
+
+
+
+
+#DatePage_CreateSchedule_Container {
+    width: 100%;
+    height: 200px;
+    border-radius: 40px;
+    margin: auto;
+    background-color: gray;
+    font-size: 20px;
+}
+
+#DatePage_CreateSchedule_Table {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#DatePage_CreateSchedule_Table select,#DatePage_CreateSchedule_Table input {
+    width: 100%;
+    height: 60%;
+    border-radius: 5px;
+    background-color: deepskyblue;
+    text-align: center;
+}
+
+#DatePage_CreateSchedule_Table tr td:nth-child(1){
+
+    width: 20%;
+}
+
+/* #DatePage_CreateSchedule_Table tr td:nth-child(2){
+
+    width: 40%;
+} */
+
+#DatePage_CreateSchedule_Table tr td:nth-child(4){
+
+    width: 10%;
 }
 

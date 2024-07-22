@@ -9,10 +9,11 @@
     /* height: 700px; */
 }
 
-table:nth-child(2) tr th {
+#Schedule_MainSchedule_Table:nth-child(2) tr th {
     background-color: burlywood;
     height: 40px;
 }
+
 
 table:nth-child(2) tr th button {
     background-color: gray;
@@ -68,8 +69,8 @@ table tr th:nth-child(7),table tr td:nth-child(7) {
 #Schedule_SelectMonth_Container table {
     height: 80%;
     width: 100%;
-    margin-top: 20px;
-    background-color: brown;
+    /* margin-top: 20px; */
+    /* background-color: brown; */
 }
 
 #Schedule_SelectMonth_Container table tr:nth-child(1) button {

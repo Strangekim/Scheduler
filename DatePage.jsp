@@ -14,6 +14,7 @@
 
 <body>
 
+
     <div id="DatePage_Main_Container">
         <div id="DatePage_Main_MenuContainer">
             <div>
@@ -65,7 +66,7 @@
             </div>
         </div>
 
-                <div id="DatePage_Schedule_Container">
+        <div id="DatePage_Schedule_Container">
             <div>
                 <p>07:00</p>
                 <p>아침운동</p>
@@ -76,7 +77,63 @@
             </div>
         </div>
 
-        
+        <div id="DatePage_CreateSchedule_Container">
+
+            <table id="DatePage_CreateSchedule_Table">
+
+                <tr>
+                    <td>
+                        <p>일 시</p>
+                    </td>
+
+                    <td>
+                        <select id="DatePage_ScheduleTime_Select">
+
+                        </select>
+                    </td>
+
+                    <td>
+                        <select id="DatePage_ScheduleMinutes_Select">
+
+                        </select>
+                    </td>
+
+                    <td>
+                    <button id="DataPage_CloseTable_Btn">X</button>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>제 목</p>
+                    </td>
+
+                    <td colspan="2">
+                        <input type="text" maxlength="10" id="DatePage_ScheduleTitle_Input">
+                    </td>
+
+                    <td>
+                        
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+
+                    </td>
+
+                    <td colspan="2">
+
+                    </td>
+
+                    <td>
+                        <button id="DatePage_ScheduleCommit_Btn">작성</button>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
 
     </div>
 

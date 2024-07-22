@@ -1,6 +1,8 @@
 const date = new Date();
 const viewYear = date.getFullYear();
 const viewMonth = date.getMonth();
+const viewdate = date.getDate();
+
 
 var viewNowBtn = document.getElementById("Schedule_ViewNow_Button")
 
@@ -55,17 +57,26 @@ function createCalenderDate () {
         for(let j = 0; j < 7; j++){
             let createTd = document.createElement("td")
             createTd.setAttribute("class", "Schedule_ScheduleDate_Td")
+            createTd.setAttribute("id", `Schedule_ScheduleDay_Tr${(i*7+j)+1}`)
             createTd.textContent = scheduleDates[i * 7 + j];
+
             createTr.appendChild(createTd);
 
             let createDiv = document.createElement("div")
             createTd.appendChild(createDiv);
+
+
+            if(createTd.textContent == viewdate){
+                createTd.style.background = "orange";
+            }
+
         }
         
         scheduleTable.appendChild(createTr);
     }
 
 };
+
 
 createCalenderDate();
 
@@ -76,14 +87,16 @@ createCalenderDate();
 // 월 선택 페이지 컨트롤
 
 const selectMonthContainer = document.getElementById("Schedule_SelectMonth_Container");
+const selectMonthCloseBtn = document.getElementById("Schedule_SelectMonthClose_Btn");
 
-// selectMonthContainer.style.display ="none";
+
+selectMonthContainer.style.display ="none";
 
 function viewMonthSelectEvent() {
     selectMonthContainer.style.display ="";
 };
 
-selectMonthContainer.onclick = function(e) {
-    console.log(1)
+selectMonthCloseBtn.onclick = function(e) {
+    selectMonthContainer.style.display ="none";
 }
 
