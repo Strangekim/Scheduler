@@ -33,6 +33,19 @@
         </div>
 
 
+
+
+
+        <div id="DatePage_SelectDay_Container">
+            <div id="DatePage_CloseSelectDay_Container">
+                <button id="DatePage_CloseSelectDay_Btn">X</button>
+            </div>
+            <table border="1" id="Schedule_MainSchedule_Table">
+
+            </table> 
+        </div>
+
+
         <div id="DatePage_Schedule_Container">
             <div>
                 <p>07:00</p>
@@ -103,6 +116,8 @@
                     </td>
 
                 </tr>
+
+                <%-- 글쓰기 영역 --%>
 
                 <tr>
                     <td>

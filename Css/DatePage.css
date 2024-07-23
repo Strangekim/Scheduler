@@ -121,3 +121,40 @@
     width: 10%;
 }
 
+
+#DatePage_SelectDay_Container {
+    width: 40%;
+    height: 300px;
+    top: 430px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: rgb(19, 134, 201);
+    opacity: 0.9;
+    align-items: center;
+    border-radius: 20px;
+    /* display: flex; */
+}
+
+#DatePage_CloseSelectDay_Container {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 3%;
+    margin-right: 5%;
+}
+
+#Schedule_MainSchedule_Table{
+    border-radius: 10px;
+    width: 90%;
+    margin: auto;
+    height: 80%;
+    background-color: beige;
+}
+
+#Schedule_MainSchedule_Table:nth-child(2) tr td:nth-child(1){
+    color: red
+}
+
+#Schedule_MainSchedule_Table:nth-child(2) tr td:nth-child(7){
+    color: blue
+}
