@@ -15,6 +15,8 @@
     justify-content: space-around;
 }
 
+/* 오늘 글쓰기 버튼 */
+
 #DatePage_Main_MenuContainer div:nth-child(1),#DatePage_Main_MenuContainer div:nth-child(3) {
     width: 20%;
     display: flex;
@@ -31,10 +33,11 @@
     margin: auto;
 }
 
+/* 날짜 버튼들 */
+
 #DatePage_Main_MenuContainer div:nth-child(2) {
     width: 50%;
     display: flex;
-    /* background-color: rgb(43, 226, 134); */
 }
 
 
@@ -52,8 +55,21 @@
 
 #DatePage_DateSelect_Btn {
     width: 50%;
+    background-color: bisque;
 }
 
+#DatePage_DateView_Container {
+    font-size: 19px;
+    width: 100%;
+    background-color: red;
+    margin: auto;
+}
+
+#DatePage_DateView_Container p {
+    width: 100px;
+    background-color: aqua;
+    margin: auto;
+}
 
 
 #DatePage_Schedule_Container {
@@ -66,7 +82,7 @@
     margin-top: 15px;
     margin-bottom: 30px;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #DatePage_Schedule_Container div {
@@ -79,8 +95,6 @@
     background-color: gray;
     color: white;
 }
-
-
 
 
 #DatePage_CreateSchedule_Container {
@@ -158,3 +172,6 @@
 #Schedule_MainSchedule_Table:nth-child(2) tr td:nth-child(7){
     color: blue
 }
+
+
+

@@ -30,15 +30,6 @@ inputId.onblur = function(e) {
 
 inputPw.onblur = function(e) {
 
-    if(inputPw.value.length < 4){
-        inputPw.value = ""
-        inputPw.style.borderColor = "red"
-        inputPw.placeholder = "4글자 이상 입력해주세요!"
-        loginBtn.disabled = true; 
-    } else {
-        inputPw.style.borderColor = "black"
-    }
-
     if (inputPw.value === ''){
         inputPw.style.borderColor = "red"
         inputPw.placeholder = "비밀번호를 입력해주세요!"
@@ -49,6 +40,16 @@ inputPw.onblur = function(e) {
         loginBtn.disabled = false; 
     }
 
+    if(inputPw.value.length < 4 && inputPw.value.length != 0){
+        inputPw.value = ""
+        inputPw.style.borderColor = "red"
+        inputPw.placeholder = "4글자 이상 입력해주세요!"
+        loginBtn.disabled = true; 
+    } else {
+        inputPw.style.borderColor = "black"
+    }
+
+    console.log(inputPw.value.length)
 
 }
 

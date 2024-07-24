@@ -92,11 +92,20 @@ const selectMonthCloseBtn = document.getElementById("Schedule_SelectMonthClose_B
 
 selectMonthContainer.style.display ="none";
 
-function viewMonthSelectEvent() {
-    selectMonthContainer.style.display ="";
+viewNowBtn.onclick = function (e) {
+
+    if(selectMonthContainer.style.display == ""){
+        selectMonthContainer.style.display ="none";
+        viewNowBtn.style.backgroundColor = "gray";
+    } else {
+        selectMonthContainer.style.display ="";
+        viewNowBtn.style.backgroundColor = "orange";
+    }
+
 };
 
 selectMonthCloseBtn.onclick = function(e) {
     selectMonthContainer.style.display ="none";
+    viewNowBtn.style.backgroundColor = "gray";
 }
 

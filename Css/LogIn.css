@@ -2,10 +2,6 @@
     font-size: 17px;
 }
 
-/* :placeholder-shown {
-    color: red;
-} */
-
 ::placeholder {
     text-align: center;
 }
@@ -24,8 +20,6 @@
     width: 85%;
     height: 85%;
     margin: auto;
-    /* background-color: aqua; */
-    
 }
 
 #Index_InputBox_Container {

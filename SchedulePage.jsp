@@ -60,7 +60,7 @@
             <tr>
                 <th colspan="7">
                     <button>&lt;</button>
-                    <button onClick="viewMonthSelectEvent()" id="Schedule_ViewNow_Button"></button>
+                    <button id="Schedule_ViewNow_Button"></button>
                     <button>&gt;</button>
                 </th>
             </tr>

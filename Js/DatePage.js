@@ -6,19 +6,24 @@ var scheduleTitle = document.getElementById("DatePage_ScheduleTitle_Input")
 var schduleCommitBtn = document.getElementById("DatePage_ScheduleCommit_Btn")
 
 
-// 창 열고 닫기
+// 글쓰기 창 열고 닫기
 
 createScheduleContainer.style.display ="none";
 
 createScheduleBtn.onclick = function(e) {
 
-    createScheduleContainer.style.display ="";
+    if(createScheduleContainer.style.display == "") {
+        createScheduleContainer.style.display = "none";
+    } else {
+        createScheduleContainer.style.display = "";
+    }
 
 }
 
 colseContainerBtn.onclick = function(e) {
     createScheduleContainer.style.display ="none";
 }
+
 
 // 예외처리
 
@@ -70,6 +75,8 @@ const date = new Date();
 const viewYear = date.getFullYear();
 const viewMonth = date.getMonth();
 const viewdate = date.getDate();
+const viewDay= date.getDay();
+console.log(viewDay)
 
 
 // 이전 달 마지막 날, 요일, 이번 달 마지막 날, 요일
@@ -105,8 +112,6 @@ for (let i = 1; i < 7 - thisLastDay; i++) {
 const scheduleDates = beforeDates.concat(thisDates, nextDates);
 
 let scheduleTable = document.getElementById("Schedule_MainSchedule_Table")
-
-console.log(scheduleTable)
 
 function createCalenderDate () {
 
@@ -150,9 +155,37 @@ var dateSelectBtn = document.getElementById("DatePage_DateSelect_Btn");
 datepageContainer.style.display = "none"
 
 dateSelectBtn.onclick = function(e) {
-    datepageContainer.style.display = "";
+
+    if(datepageContainer.style.display == ""){
+        datepageContainer.style.display = "none"
+    } else {
+        datepageContainer.style.display = "";
+    }
 }
 
 document.getElementById("DatePage_CloseSelectDay_Btn").onclick = function(e){
     datepageContainer.style.display ="none"
+}
+
+
+
+document.getElementById("DatePage_DateViewYear_P").innerHTML = viewYear;
+document.getElementById("DatePage_DateViewDate_P").innerHTML = `${viewMonth + 1}월 ${viewdate}일`;
+
+if (viewDay == 0){
+    document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
+} else if (viewDay == 1) {
+    document.getElementById("DatePage_DateViewDay_P").innerHTML = "월요일"
+} else if (viewDay == 2) {
+    document.getElementById("DatePage_DateViewDay_P").innerHTML = "화요일"
+} else if (viewDay == 3) {
+    document.getElementById("DatePage_DateViewDay_P").innerHTML = "수요일"
+} else if (viewDay == 4) {
+    document.getElementById("DatePage_DateViewDay_P").innerHTML = "목요일"
+} else if (viewDay == 5) {
+    document.getElementById("DatePage_DateViewDay_P").innerHTML = "금요일"
+} else if (viewDay == 6) {
+    document.getElementById("DatePage_DateViewDay_P").innerHTML = "토요일"
+} else if (viewDay == 7) {
+    document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
 }

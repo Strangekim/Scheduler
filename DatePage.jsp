@@ -23,7 +23,15 @@
 
             <div>
                 <button>&lt;</button>
-                <button id="DatePage_DateSelect_Btn"></button>
+
+                <button id="DatePage_DateSelect_Btn">
+                    <div id="DatePage_DateView_Container">
+                        <p id="DatePage_DateViewYear_P"></p>
+                        <p id="DatePage_DateViewDate_P"></p>
+                        <p id="DatePage_DateViewDay_P"></p>
+                    </div>
+                </button>
+                
                 <button>&gt;</button>
             </div>
 
