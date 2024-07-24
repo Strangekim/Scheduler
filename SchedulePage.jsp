@@ -17,19 +17,24 @@
 
     <div id="Schedule_Scheduler_Container">
 
+
+    <%-- 월 선택 영역 --%>
+
         <div id="Schedule_SelectMonth_Container">
 
             <button id="Schedule_SelectMonthClose_Btn">x</button>
 
-            <table>
+            <table id="Schedule_SelectMonthContainer_Table">
 
-                <th colspan="6">
-                    <input type="month">
-                </th>
+                <tr>
+                    <th colspan="6">
+                        
+                    </th>
+                </tr>
                 
                 <tr>
                     <th colspan="6">
-                        <button>2024</button>
+                        <button id="Schdule_SelectYear_Btn"></button>
                     </th>
                 </tr>
 
@@ -53,7 +58,10 @@
 
 
             </table>
+
         </div>
+
+        <%-- 년 선택 영역 --%>
 
         <table border="1" id="Schedule_MainSchedule_Table">
 

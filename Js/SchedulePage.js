@@ -109,3 +109,42 @@ selectMonthCloseBtn.onclick = function(e) {
     viewNowBtn.style.backgroundColor = "gray";
 }
 
+// 년 & 월 선택 영역 스왑
+
+var selectYearBtn = document.getElementById("Schdule_SelectYear_Btn");
+
+var selectMotnTable = document.getElementById("Schedule_SelectMonthContainer_Table")
+var selectMotnTableHtml = selectMotnTable.innerHTML;
+
+selectYearBtn.innerHTML = viewYear;
+
+selectYearBtn.onclick = function(e){
+    // selectMonthContainer.style.display ="none";
+    // viewNowBtn.style.backgroundColor = "gray";
+    selectYearBtn.innerHTML = viewYear;
+    selectMotnTable.innerHTML = "";
+
+
+    for(var i = 0; i < 9; i++){
+        
+        const createBtn = document.createElement("button")
+
+        createBtn.setAttribute("id",`${(viewYear - 4) + i}`);
+        createBtn.setAttribute("class", "Schduel_SelectYear_Class")
+        createBtn.innerHTML = (viewYear - 4) + i;
+        createBtn.style.width = "33%";
+        selectMotnTable.appendChild(createBtn);
+
+        createBtn.onclick = function(e) {
+
+            selectMotnTable.innerHTML = "";
+            selectMotnTable.innerHTML = selectMotnTableHtml;
+
+        };
+    }
+
+}
+                                                
+document.querySelectorAll("Schduel_SelectYear_Class").onclick = function (e){
+    console.log(1)
+}

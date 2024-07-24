@@ -16,26 +16,26 @@
 }
 
 
-table:nth-child(2) tr th button {
+#Schedule_MainSchedule_Table:nth-child(2) tr th button {
     background-color: gray;
     color: aliceblue;
     height: 80%;
     font-size: 25px;
 }
 
-table:nth-child(2) tr th button:nth-child(1), table:nth-child(2) tr th button:nth-child(3) {
+#Schedule_MainSchedule_Table:nth-child(2) tr th button:nth-child(1), #Schedule_MainSchedule_Table:nth-child(2) tr th button:nth-child(3) {
     width: 50px;
 }
 
-table:nth-child(2) tr th button:nth-child(2) {
+#Schedule_MainSchedule_Table:nth-child(2) tr th button:nth-child(2) {
     width: 130px;
 }
 
-table:nth-child(2) tr td {
+#Schedule_MainSchedule_Table:nth-child(2) tr td {
     height: 110px;
 }
 
-table:nth-child(2) tr th:nth-child(1),table tr td:nth-child(1) {
+table:nth-child(2) tr th:nth-child(1), table tr td:nth-child(1) {
     color: red;
 }
 
@@ -75,7 +75,7 @@ table tr th:nth-child(7),table tr td:nth-child(7) {
     /* background-color: brown; */
 }
 
-#Schedule_SelectMonth_Container table tr:nth-child(1) button {
+#Schedule_SelectMonth_Container table tr:nth-child(2) button {
     width: 30%;
 }
 
@@ -93,3 +93,6 @@ table tr th:nth-child(7),table tr td:nth-child(7) {
     margin-left: 90%;
 }
 
+#Schedule_SelectMoth_Input {
+    margin: 25%;
+}
