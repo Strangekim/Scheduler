@@ -63,3 +63,8 @@ function checkInputValue () {
         console.log(1)
     }
 }
+
+
+function findPwEvent () {
+    location.href = "./Action/FindPwAction.jsp?id=" + inputId.value + "&phonenumber=" + inputPhone.value
+}

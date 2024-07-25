@@ -26,7 +26,7 @@
 
             <div id="Index_InButtonBox_Container">
 
-                    <input type="button" id="Index_Button_FindId" value="비밀번호 찾기">
+                    <input onclick="findPwEvent()" type="button" id="Index_Button_FindId" value="비밀번호 찾기">
 
             </div>        
 

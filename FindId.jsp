@@ -26,7 +26,7 @@
 
             <div id="Index_InButtonBox_Container">
 
-                    <input type="button" id="Index_Button_FindId" value="ID 찾기">
+                    <input onclick="findIdEvent()" type="button" id="Index_Button_FindId" value="ID 찾기">
 
             </div>        
 

@@ -63,11 +63,9 @@ function checkInputValue () {
 
     findIdBtn.disabled = !checkValue;
 
-    // 회원가입 placeholder 에 명시해줄지???
-    
-    if(checkValue) {
-        console.log(0)
-    } else {
-        console.log(1)
-    }
+}
+
+
+function findIdEvent () {
+    location.href = "./Action/FindIdAction.jsp?name=" + inputName.value + "&phonenumber=" + inputPhone.value
 }

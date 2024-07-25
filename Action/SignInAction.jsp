@@ -57,7 +57,7 @@
 
     ResultSet checkIdResult = checkIdQuery.executeQuery();
 
-        //SQL 준비
+    //SQL 준비
     String checkPhoneSql = "SELECT memberPhoneNumber FROM Member WHERE memberPhoneNumber = ?";
 
     PreparedStatement checkPhoneQuery = connect.prepareStatement(checkPhoneSql);
