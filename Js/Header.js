@@ -130,7 +130,6 @@ background-color: gray;
 color: white;
 `
 
-
 createButtonsDiv.appendChild(createSecondButtons)
 
 // 세번째 버튼 추가

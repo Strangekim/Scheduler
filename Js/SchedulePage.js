@@ -80,8 +80,6 @@ function createCalenderDate () {
 
 createCalenderDate();
 
-// console.log(scheduleTable)
-
 
 
 // 월 선택 페이지 컨트롤

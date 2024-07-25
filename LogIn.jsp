@@ -14,7 +14,6 @@
 
 <body>
 
-    <%-- <header id="Main_Header"></header> --%>
 
     <main id="Index_Main_Container">
 
@@ -29,7 +28,7 @@
 
             <div id="Index_InButtonBox_Container">
 
-                    <input type="button" id="Index_Button_LogIn" value="로그인">
+                    <input type="button" id="Index_Button_LogIn" onclick='logInActionEvent()' value="로그인">
                     <a href="SignIn.jsp"><button id="Index_Button_SigIn">회원 가입</button></a>
             </div>        
 

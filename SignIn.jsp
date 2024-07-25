@@ -41,9 +41,6 @@
                     <input type="button" id="Index_Button_SignIn" value="회원가입">
 
             </div>        
-
-
-
         </div>
           
     </main>

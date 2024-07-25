@@ -49,7 +49,13 @@ inputPw.onblur = function(e) {
         inputPw.style.borderColor = "black"
     }
 
-    console.log(inputPw.value.length)
+
+}
+
+function logInActionEvent() {
+
+    location.href="./Action/LogInAction.jsp?id=" + inputId.value + "&pw=" + inputPw.value
+
 
 }
 
