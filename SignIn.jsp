@@ -27,10 +27,10 @@
                 
                 <div id="Index_RadioButtonBox_container">
                     <div class="Index_RadioButton_Container">
-                        <input type="radio" name="position" id="Index_Member_Btn" checked><label for="Index_Member_Btn">팀원</lable>
+                        <input type="radio" name="position" id="Index_Member_Btn" checked><label for="Index_Member_Btn">팀원</label>
                     </div>
                     <div class="Index_RadioButton_Container">
-                        <input type="radio" name="position" id="Index_Leader_Btn"><label for="Index_Leader_Btn">팀장</lable>
+                        <input type="radio" name="position" id="Index_Leader_Btn"><label for="Index_Leader_Btn">팀장</label>
                     </div> 
                 </div>
 
@@ -38,7 +38,7 @@
 
             <div id="Index_InButtonBox_Container">
 
-                    <input type="button" id="Index_Button_SignIn" value="회원가입">
+                    <input type="button" id="Index_Button_SignIn" value="회원가입" onclick="signInActionEvent()">
 
             </div>        
         </div>
