@@ -96,6 +96,10 @@ createFirstButtons.setAttribute("id", "Header_BtnStyle_Btn")
 
 createFirstButtons.type = "button"
 
+createFirstButtons.onclick = function(e) {
+    location.href = "Action/LogOutAction.jsp"
+}
+
 
 createFirstButtons.style.cssText = 
 `

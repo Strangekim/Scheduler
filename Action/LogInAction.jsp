@@ -41,7 +41,7 @@
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
 
     //SQL 준비
-    String checkIdSql = "SELECT memberPw, memberName, memberIdx FROM Member WHERE memberId = ?";
+    String checkIdSql = "SELECT memberPw, memberName, memberIdx, gradeIdx FROM Member WHERE memberId = ?";
 
     PreparedStatement checkIdQuery = connect.prepareStatement(checkIdSql);
     checkIdQuery.setString(1, idValue);
@@ -54,11 +54,13 @@
         String storedPw = checkIdResult.getString("memberPw");
         String memberName = checkIdResult.getString("memberName");
         String memberIdx = checkIdResult.getString("memberIdx");
+        String gradeIdx = checkIdResult.getString("gradeIdx");
 
         if(pwValue.equals(storedPw)){
             session = request.getSession();
             session.setAttribute("memberName", memberName);
             session.setAttribute("memberIdx", memberIdx);
+            session.setAttribute("gradeIdx", gradeIdx);
             session.setAttribute("loginSuccess", true);
 %>
     <title>로그인 성공</title>
