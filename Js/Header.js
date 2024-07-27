@@ -155,12 +155,35 @@ background-color: gray;
 color: white;
 `
 
-
 createButtonsDiv.appendChild(createThirdButtons)
+
+// 팀장 버튼 추가
+
+const createForthButtons = document.createElement("input")
+
+createForthButtons.setAttribute("id", "Header_BtnStyle_Btn")
+
+
+createForthButtons.type = "button"
+createForthButtons.style.cssText = 
+`
+width: 100px;
+height: 50%;
+margin-top: 20px;
+margin-right: 3%;
+border-radius: 7px;
+background-color: orange;
+color: white;
+`
+
+createButtonsDiv.appendChild(createForthButtons)
+
+
 
 
 // 경로에 따라 나올 버튼 선택
 function headerBtnDisplay () {
+
 
 
     // 로그인 페이지
@@ -179,6 +202,7 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
 ) {
     createSecondButtons.style.display = "none";
     createThirdButtons.style.display = "none";
+    createForthButtons.style.display = "none";
 
     createFirstButtons.value = "로그인"
 
@@ -195,10 +219,18 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
 
     // 스케줄 페이지
 } else if (window.location.pathname == "/scheduler/SchedulePage.jsp") {
-    createThirdButtons.style.display = "none";
+    
+    let getGrade = document.getElementById("Schedule_GetGrade_Input").value
+
+    createThirdButtons.style.display = "none"; 
+    
+    if(getGrade != 2){
+        createForthButtons.style.display = "none"
+    }
 
     createFirstButtons.value = "로그아웃"
     createSecondButtons.value = "마이페이지"
+    createForthButtons.value = "팀원스케줄보기"
 
     createSecondButtons.onclick = function () {
         window.location.href= 'MyPage.jsp'
@@ -234,3 +266,5 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
 
 
 headerBtnDisplay();
+
+
