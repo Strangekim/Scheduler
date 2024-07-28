@@ -197,5 +197,5 @@ function setDatePageEvent(e) {
 
     console.log(date);
 
-    location.href = "./DatePage.jsp?year=" + year + "&month=" + month + "&=date" + date
+    location.href = "./DatePage.jsp?year=" + year + "&month=" + month + "&date=" + date
 }

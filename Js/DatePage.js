@@ -169,28 +169,36 @@ document.getElementById("DatePage_CloseSelectDay_Btn").onclick = function(e){
 
 
 
-document.getElementById("DatePage_DateViewYear_P").innerHTML = viewYear;
-document.getElementById("DatePage_DateViewDate_P").innerHTML = `${viewMonth + 1}월 ${viewdate}일`;
+// document.getElementById("DatePage_DateViewYear_P").innerHTML = viewYear;
+// document.getElementById("DatePage_DateViewDate_P").innerHTML = `${viewMonth + 1}월 ${viewdate}일`;
 
-if (viewDay == 0){
-    document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
-} else if (viewDay == 1) {
-    document.getElementById("DatePage_DateViewDay_P").innerHTML = "월요일"
-} else if (viewDay == 2) {
-    document.getElementById("DatePage_DateViewDay_P").innerHTML = "화요일"
-} else if (viewDay == 3) {
-    document.getElementById("DatePage_DateViewDay_P").innerHTML = "수요일"
-} else if (viewDay == 4) {
-    document.getElementById("DatePage_DateViewDay_P").innerHTML = "목요일"
-} else if (viewDay == 5) {
-    document.getElementById("DatePage_DateViewDay_P").innerHTML = "금요일"
-} else if (viewDay == 6) {
-    document.getElementById("DatePage_DateViewDay_P").innerHTML = "토요일"
-} else  {
-    document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
-}
+// if (viewDay == 0){
+//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
+// } else if (viewDay == 1) {
+//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "월요일"
+// } else if (viewDay == 2) {
+//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "화요일"
+// } else if (viewDay == 3) {
+//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "수요일"
+// } else if (viewDay == 4) {
+//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "목요일"
+// } else if (viewDay == 5) {
+//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "금요일"
+// } else if (viewDay == 6) {
+//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "토요일"
+// } else  {
+//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
+// }
 
 
 function createScheduleEvent () {
-    location.href = "./Action/CreateScheduleAction.jsp?time=" + timeSelect.value + "&minute=" + minuteSelect.value + "&title=" + scheduleTitle.value
+    let getUrl = new URL(location.href).searchParams;
+
+    let year = getUrl.get('year');
+    let month = getUrl.get('month');
+    let date = getUrl.get('date');
+
+    let scheduleDatetime = `${year}-${month}-${date} ${timeSelect.value}:${minuteSelect.value}:00`
+    console.log(scheduleDatetime)
+    location.href = "./Action/CreateScheduleAction.jsp?scheduleDatetime=" + scheduleDatetime + "&title=" + scheduleTitle.value
 }

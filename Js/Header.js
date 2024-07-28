@@ -184,7 +184,9 @@ createButtonsDiv.appendChild(createForthButtons)
 // 경로에 따라 나올 버튼 선택
 function headerBtnDisplay () {
 
-
+var date = new Date();
+var viewYear = date.getFullYear();
+var viewMonth = Number(date.getMonth()) + 1;
 
     // 로그인 페이지
 if (window.location.pathname == "/scheduler/LogIn.jsp") {
@@ -238,27 +240,35 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
 
     createLogoButton.onclick = function () {
         console.log(createLogoButton)
-        window.location.href= 'SchedulePage.jsp'
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
     }
     
     // 일일 페이지
 
 } else if (window.location.pathname == "/scheduler/DatePage.jsp"
     || window.location.pathname == "/scheduler/MyPage.jsp"){
+
+    let getGrade = document.getElementById("Schedule_GetGrade_Input").value
+
+    if(getGrade != 2){
+        createForthButtons.style.display = "none"
+    }
+
     createThirdButtons.style.display = "none";
 
     createFirstButtons.value = "로그아웃"
     createSecondButtons.value = "HOME"
+    createForthButtons.value = "팀원스케줄보기"
 
     createSecondButtons.onclick = function () {
-        window.location.href= 'SchedulePage.jsp'
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
     }
 
 
 
     createLogoButton.onclick = function () {
         console.log(createLogoButton)
-        window.location.href= 'SchedulePage.jsp'
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
     }
 
     }

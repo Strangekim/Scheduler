@@ -1,5 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%-- 데이터베이스 탐색 (Connector) --%>
+<%@ page import="java.sql.DriverManager" %>
+<%-- 데이터베이스 통신 연결 --%>
+<%@ page import="java.sql.Connection" %>
+<%-- SQL 생성 및 전송 라이브러리 --%>
+<%@ page import="java.sql.PreparedStatement" %>
 
+<%@ page import="java.sql.ResultSet" %>
+
+<%@ page import="java.time.LocalDate" %>
+
+<%@ page import="java.util.Calendar"%>
+<%  
+    request.setCharacterEncoding("utf-8");
+
+    String gradeIdx = (String) session.getAttribute("gradeIdx");
+    String memberIdx = (String) session.getAttribute("memberIdx");
+
+    String year = request.getParameter("year");
+    String month = request.getParameter("month");
+    String date = request.getParameter("date");
+
+
+    Class.forName("org.mariadb.jdbc.Driver");
+
+    // DB 통신 연결
+    Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
+
+    // 게시글 전체 정보 받아오기 sql
+    // String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND memberIdx = ?";
+    // PreparedStatement query = connect.prepareStatement(sql);
+    
+    // query.setString(1, sy);
+    // query.setString(2, sm);
+    // query.setString(3, memberIdx);
+
+    // ResultSet result = query.executeQuery();
+
+    // session = request.getSession();
+
+
+%>
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -13,6 +54,7 @@
 </head>
 
 <body>
+    <input value="<%=gradeIdx%>" type="hidden" id="Schedule_GetGrade_Input">
 
 
     <div id="DatePage_Main_Container">
@@ -26,9 +68,8 @@
 
                 <button id="DatePage_DateSelect_Btn">
                     <div id="DatePage_DateView_Container">
-                        <p id="DatePage_DateViewYear_P"></p>
-                        <p id="DatePage_DateViewDate_P"></p>
-                        <p id="DatePage_DateViewDay_P"></p>
+                        <p id="DatePage_DateViewYear_P"><%=year%></p>
+                        <p id="DatePage_DateViewDate_P"><%=month%>월<%=date%>일</p>
                     </div>
                 </button>
                 

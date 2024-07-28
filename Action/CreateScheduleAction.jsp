@@ -9,8 +9,7 @@
 
 <%
     request.setCharacterEncoding("utf-8");
-    String time = request.getParameter("time");
-    String minute = request.getParameter("minute");
+    String scheduleDatetime = request.getParameter("scheduleDatetime");
     String title = request.getParameter("title");
 
 
@@ -28,7 +27,7 @@
 <body>
 
 <% 
-    if (time == null || time.isEmpty() || minute == null || minute.isEmpty() || title.isEmpty() || title == null ) {
+    if (scheduleDatetime == null || title.isEmpty() || title == null ) {
 %>
 
     <script>
@@ -37,10 +36,8 @@
     </script>
 
 <% 
-    } if else (memberIdx == null || memberIdx.isEmpty()) {
+    } else if (memberIdx == null || memberIdx.isEmpty()) {
 %>
-
-
 
     <script>
     alert("로그인 후 작성해주세요.")
@@ -57,31 +54,28 @@
     //SQL 준비
     String sql = "INSERT INTO Schedule (ScheduleDateTime, ScheduleTitle, memberIdx) VALUES (?, ?, ?)";
 
-    // PreparedStatement query = connect.prepareStatement(sql);
+    PreparedStatement query = connect.prepareStatement(sql);
 
-    // query.setString(1, userIdx);
-    // query.setString(2, articleTitle);
-    // query.setString(3, articleText);
+    query.setString(1, scheduleDatetime);
+    query.setString(2, title);
+    query.setString(3, memberIdx);
 
 
-    // // SQL 전송
+    // SQL 전송
 
-    // query.executeUpdate();
+    query.executeUpdate();
 
     
 %>
-
-
-    <title>스케줄 작성 완료</title>
-</head>
-<body>
-
     <script>
-    console.log(<%=gradeIdx%>)
     alert("스케줄 작성 완료")
     
-    location.href="../DatePage.jsp"
+    history.back()
 
     </script>
+
+<%
+    }
+%>
 </body>
 </html>
