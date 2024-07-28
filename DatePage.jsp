@@ -151,7 +151,7 @@
                     </td>
 
                     <td>
-                        <button id="DatePage_ScheduleCommit_Btn">작성</button>
+                        <button id="DatePage_ScheduleCommit_Btn" onclick="createScheduleEvent()">작성</button>
                     </td>
                 </tr>
                 

@@ -9,6 +9,8 @@
 
 <%@ page import="java.sql.ResultSet" %>
 
+<%@ page import="java.time.LocalDate" %>
+
 
     <html lang="kr">
     <head>
@@ -40,6 +42,10 @@
 
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
 
+    LocalDate today = LocalDate.now();
+    int year = today.getYear(); 
+    int month = today.getMonthValue(); 
+
     //SQL 준비
     String checkIdSql = "SELECT memberPw, memberName, memberIdx, gradeIdx FROM Member WHERE memberId = ?";
 
@@ -65,7 +71,7 @@
 %>
     <title>로그인 성공</title>
     <script>
-        location.href = "../SchedulePage.jsp" // 로그인 성공 후 이동할 페이지 지정
+        location.href = "../SchedulePage.jsp?year=" + <%=year%> + "&month=" + <%=month%>// 로그인 성공 후 이동할 페이지 지정
     </script>
 
 <%

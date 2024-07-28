@@ -186,6 +186,11 @@ if (viewDay == 0){
     document.getElementById("DatePage_DateViewDay_P").innerHTML = "금요일"
 } else if (viewDay == 6) {
     document.getElementById("DatePage_DateViewDay_P").innerHTML = "토요일"
-} else if (viewDay == 7) {
+} else  {
     document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
+}
+
+
+function createScheduleEvent () {
+    location.href = "./Action/CreateScheduleAction.jsp?time=" + timeSelect.value + "&minute=" + minuteSelect.value + "&title=" + scheduleTitle.value
 }
