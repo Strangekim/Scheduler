@@ -5,6 +5,13 @@ var colseContainerBtn = document.getElementById("DataPage_CloseTable_Btn")
 var scheduleTitle = document.getElementById("DatePage_ScheduleTitle_Input")
 var schduleCommitBtn = document.getElementById("DatePage_ScheduleCommit_Btn")
 
+const getUrl = new URL(location.href).searchParams;
+
+const urlYear = getUrl.get('year');
+const urlMonth = getUrl.get('month');
+const urlDate = getUrl.get('date');
+const urlgrade = getUrl.get('grade');
+
 
 // 글쓰기 창 열고 닫기
 
@@ -131,7 +138,6 @@ function createCalenderDate () {
             let createDiv = document.createElement("div")
             createTd.appendChild(createDiv);
 
-
             if(createTd.textContent == viewdate){
                 createTd.style.background = "orange";
             }
@@ -140,11 +146,20 @@ function createCalenderDate () {
         
         scheduleTable.appendChild(createTr);
     }
-
 };
 
 
 createCalenderDate();
+
+document.querySelectorAll('.Schedule_ScheduleDate_Td').forEach(function(e) {
+    e.addEventListener('click', moveDateEvent);
+});
+
+function moveDateEvent (event) {
+    console.log(event.target)
+}
+
+
 
 
 // 창 여닫기
@@ -168,40 +183,11 @@ document.getElementById("DatePage_CloseSelectDay_Btn").onclick = function(e){
 }
 
 
-
-// document.getElementById("DatePage_DateViewYear_P").innerHTML = viewYear;
-// document.getElementById("DatePage_DateViewDate_P").innerHTML = `${viewMonth + 1}월 ${viewdate}일`;
-
-// if (viewDay == 0){
-//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
-// } else if (viewDay == 1) {
-//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "월요일"
-// } else if (viewDay == 2) {
-//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "화요일"
-// } else if (viewDay == 3) {
-//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "수요일"
-// } else if (viewDay == 4) {
-//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "목요일"
-// } else if (viewDay == 5) {
-//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "금요일"
-// } else if (viewDay == 6) {
-//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "토요일"
-// } else  {
-//     document.getElementById("DatePage_DateViewDay_P").innerHTML = "일요일"
-// }
-
-
 function createScheduleEvent () {
-    let getUrl = new URL(location.href).searchParams;
-
-    let year = getUrl.get('year');
-    let month = getUrl.get('month');
-    let date = getUrl.get('date');
-
-    let scheduleDatetime = `${year}-${month}-${date} ${timeSelect.value}:${minuteSelect.value}:00`
+    let scheduleDatetime = `${urlYear}-${urlMonth}-${urlDate} ${timeSelect.value}:${minuteSelect.value}:00`
     console.log(scheduleDatetime)
     location.href = "./Action/CreateScheduleAction.jsp?scheduleDatetime=" + scheduleDatetime + "&title=" + scheduleTitle.value +
-    "&year=" + year + "&month=" + month + "&date=" + date
+    "&year=" + urlYear + "&month=" + urlMonth + "&date=" + urlDate
 };
 
 
@@ -214,3 +200,61 @@ function scheduleDeleteEvent (event) {
 
     location.href = "./Action/DeleteScheduleAction.jsp?scheduleIdx=" + scheduleIdx
 };
+
+
+// 좌우 이동 버튼
+
+function beforeDayEvent () {
+    var changeYear = Number(urlYear);
+    var changeMonth = Number(urlMonth);
+    var changeDate = Number(urlDate);
+
+    
+    if(changeDate == 1) {
+        var lastDay = new Date(urlYear, changeMonth - 1, 0);
+        if(changeMonth == 1){
+            changeYear = changeYear - 1;
+            changeMonth = 12;
+        }else {
+            changeMonth = changeMonth - 1;
+        }
+        changeDate = lastDay.getDate();
+
+    } else {
+        changeDate = changeDate - 1;
+    }
+
+    if (urlgrade) {
+        location.href = "./DatePage.jsp?year=" + changeYear + "&month=" + changeMonth + "&date=" + changeDate + "&grade=" + urlgrade        
+    } else {
+        location.href = "./DatePage.jsp?year=" + changeYear + "&month=" + changeMonth + "&date=" + changeDate
+    }
+
+}
+
+
+function afterDayEvent () {
+    var changeYear = Number(urlYear);
+    var changeMonth = Number(urlMonth);
+    var changeDate = Number(urlDate);
+
+    var lastDay = new Date(urlYear, changeMonth, 0);
+
+    if(changeDate == lastDay.getDate()) {
+        if(changeMonth == 12) {
+            changeYear = changeYear + 1;
+            changeMonth = 1;
+        } else {
+        changeMonth = changeMonth + 1;
+        }
+        changeDate = 1;
+    } else {
+        changeDate = changeDate + 1;
+    }
+    if (urlgrade) {
+        location.href = "./DatePage.jsp?year=" + changeYear + "&month=" + changeMonth + "&date=" + changeDate + "&grade=" + urlgrade        
+    } else {
+        location.href = "./DatePage.jsp?year=" + changeYear + "&month=" + changeMonth + "&date=" + changeDate
+    }
+}
+

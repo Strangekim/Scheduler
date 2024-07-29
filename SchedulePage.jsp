@@ -13,6 +13,7 @@
 
 <%@ page import="java.util.Calendar"%>
 
+
 <%  
     request.setCharacterEncoding("utf-8");
 
@@ -149,6 +150,13 @@
             </tr>
 
 <%
+
+    while (result.next()) {
+        String ScheduleDateTime = result.getString("ScheduleDateTime");
+    
+%>
+    <%=ScheduleDateTime%>
+<%          }
 			// 1일 앞 달
 			Calendar preCal = (Calendar)cal.clone();
 			preCal.add(Calendar.DATE, -(week-1));

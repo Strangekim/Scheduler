@@ -8,8 +8,7 @@ const urlParams = new URL(location.href).searchParams;
 
 const year = urlParams.get('year');
 const month = urlParams.get('month');
-
-
+const grade = urlParams.get('grade');
 
 var viewNowBtn = document.getElementById("Schedule_ViewNow_Button")
 
@@ -142,10 +141,12 @@ selectYearBtn.onclick = function(e){
         console.log(selectYearBtn.innerHTML)
 }
 
-// var tmp = document.querySelectorAll("Schduel_SelectYear_Class")[0]
+// document.querySelectorAll('.Schedule_ScheduleDate_Td').forEach(function(e) {
+//     e.addEventListener('click', moveDateEvent);
+// });
 
-// tmp.onclick = function(e){
-//     console.log(1)
+// function moveDateEvent (event) {
+//     console.log(event.target)
 // }
 
 
@@ -162,7 +163,11 @@ function decreaseMonthEvent () {
         decreaseMonth = 12;
     }
 
-    location.href = "./SchedulePage.jsp?year=" + decreaseYear + "&month=" + decreaseMonth
+    if (grade) {
+        location.href = "./SchedulePage.jsp?year=" + decreaseYear + "&month=" + decreaseMonth + "&grade=" + grade
+    } else {
+        location.href = "./SchedulePage.jsp?year=" + decreaseYear + "&month=" + decreaseMonth
+    }
 }
 
 function increaseMonthEvent () {
@@ -176,8 +181,12 @@ function increaseMonthEvent () {
         increaseMonth = 1;
     }
 
-    
-    location.href = "./SchedulePage.jsp?year=" + increaseYear + "&month=" + increaseMonth
+    if (grade) {
+        location.href = "./SchedulePage.jsp?year=" + increaseYear + "&month=" + increaseMonth + "&grade=" + grade
+    } else {
+        location.href = "./SchedulePage.jsp?year=" + increaseYear + "&month=" + increaseMonth
+    }
+
 }
 
 

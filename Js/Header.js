@@ -188,6 +188,13 @@ var date = new Date();
 var viewYear = date.getFullYear();
 var viewMonth = Number(date.getMonth()) + 1;
 
+const headerUrlParams = new URL(location.href).searchParams;
+
+const headerYear = headerUrlParams.get('year');
+const headerMonth = headerUrlParams.get('month');
+const headerDate = headerUrlParams.get('date');
+const headerGrade = headerUrlParams.get('grade');
+
     // 로그인 페이지
 if (window.location.pathname == "/scheduler/LogIn.jsp") {
     createButtonsDiv.style.display = "none";
@@ -239,8 +246,15 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
     }
 
     createLogoButton.onclick = function () {
-        console.log(createLogoButton)
         location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+    }
+
+    createForthButtons.onclick = function () {
+        if (!headerGrade || headerGrade == null) {
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1;
+        } else {
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+        }
     }
     
     // 일일 페이지
@@ -264,15 +278,27 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
         location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
     }
 
-
-
     createLogoButton.onclick = function () {
         console.log(createLogoButton)
         location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
     }
 
+    createForthButtons.onclick = function () {
+        if (!headerGrade || headerGrade == null) {
+            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 1;
+        } else {
+            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate
+        }
+    }
+
+    }
+
+    if (headerGrade){
+        createForthButtons.style.background = "red";
     }
 };
+
+
 
 
 headerBtnDisplay();

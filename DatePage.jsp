@@ -11,6 +11,7 @@
 <%@ page import="java.time.LocalDate" %>
 
 <%@ page import="java.util.Calendar"%>
+
 <%  
     request.setCharacterEncoding("utf-8");
     
@@ -78,7 +79,7 @@
             </div>
 
             <div>
-                <button>&lt;</button>
+                <button onclick="beforeDayEvent()">&lt;</button>
 
                 <button id="DatePage_DateSelect_Btn">
                     <div id="DatePage_DateView_Container">
@@ -87,7 +88,7 @@
                     </div>
                 </button>
                 
-                <button>&gt;</button>
+                <button onclick="afterDayEvent()">&gt;</button>
             </div>
 
             <div>
