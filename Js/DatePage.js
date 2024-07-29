@@ -200,5 +200,17 @@ function createScheduleEvent () {
 
     let scheduleDatetime = `${year}-${month}-${date} ${timeSelect.value}:${minuteSelect.value}:00`
     console.log(scheduleDatetime)
-    location.href = "./Action/CreateScheduleAction.jsp?scheduleDatetime=" + scheduleDatetime + "&title=" + scheduleTitle.value
-}
+    location.href = "./Action/CreateScheduleAction.jsp?scheduleDatetime=" + scheduleDatetime + "&title=" + scheduleTitle.value +
+    "&year=" + year + "&month=" + month + "&date=" + date
+};
+
+
+document.querySelectorAll('.Schedule_GetScheduleIdx_Input').forEach(function(e) {
+    e.addEventListener('click', scheduleDeleteEvent);
+});
+
+function scheduleDeleteEvent (event) {
+    var scheduleIdx = event.target.name;
+
+    location.href = "./Action/DeleteScheduleAction.jsp?scheduleIdx=" + scheduleIdx
+};

@@ -13,6 +13,8 @@
 <%@ page import="java.util.Calendar"%>
 <%  
     request.setCharacterEncoding("utf-8");
+    
+    session = request.getSession();
 
     String gradeIdx = (String) session.getAttribute("gradeIdx");
     String memberIdx = (String) session.getAttribute("memberIdx");
@@ -26,20 +28,6 @@
 
     // DB 통신 연결
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
-
-    // 게시글 전체 정보 받아오기 sql
-    // String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND memberIdx = ?";
-    // PreparedStatement query = connect.prepareStatement(sql);
-    
-    // query.setString(1, sy);
-    // query.setString(2, sm);
-    // query.setString(3, memberIdx);
-
-    // ResultSet result = query.executeQuery();
-
-    // session = request.getSession();
-
-
 %>
 
 <!DOCTYPE html>
@@ -52,11 +40,37 @@
     <link rel="stylesheet" type="text/css" href="Css/DatePage.css">
 
 </head>
-
 <body>
     <input value="<%=gradeIdx%>" type="hidden" id="Schedule_GetGrade_Input">
 
+<%
 
+    if (year == null || month == null || date == null || memberIdx == null || gradeIdx == null
+    || year.isEmpty() || month.isEmpty() || date.isEmpty() || memberIdx.isEmpty() || gradeIdx.isEmpty()){ 
+
+%>
+
+    <script>
+    alert("잘못된 접근입니다.")
+    location.href="LogIn.jsp"
+    </script>
+</body>
+</html>
+
+<% 
+    } else {
+    // 해당 날짜의 스케줄 정보 받아오기 sql
+    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND DAY(ScheduleDateTime) = ? AND memberIdx = ? ORDER BY ScheduleDateTime ASC";
+    PreparedStatement query = connect.prepareStatement(sql);
+    
+    query.setString(1, year);
+    query.setString(2, month);
+    query.setString(3, date);
+    query.setString(4, memberIdx);
+
+    ResultSet result = query.executeQuery();
+
+%> 
     <div id="DatePage_Main_Container">
         <div id="DatePage_Main_MenuContainer">
             <div>
@@ -81,10 +95,6 @@
             </div>
         </div>
 
-
-
-
-
         <div id="DatePage_SelectDay_Container">
             <div id="DatePage_CloseSelectDay_Container">
                 <button id="DatePage_CloseSelectDay_Btn">X</button>
@@ -95,49 +105,29 @@
         </div>
 
 
+<%
+
+    while (result.next()) {
+        String ScheduleDateTime = result.getString("ScheduleDateTime");
+        String ScheduleTitle = result.getString("ScheduleTitle");
+        String ScheduleIdx = result.getString("ScheduleIdx");
+    
+%>
+    
         <div id="DatePage_Schedule_Container">
             <div>
-                <p>07:00</p>
-                <p>아침운동</p>
+                <p><%=ScheduleDateTime%></p>
+                <p><%=ScheduleTitle%></p>
                 <p>
+                    <input value="<%=ScheduleIdx%>" type="hidden" >
                     <button>수정</button>
-                    <button>삭제</button>
+                    <button name="<%=ScheduleIdx%>" class="Schedule_GetScheduleIdx_Input">삭제</button>
                 </p>
             </div>
         </div>
-
-                <div id="DatePage_Schedule_Container">
-            <div>
-                <p>07:00</p>
-                <p>아침운동</p>
-                <p>
-                    <button>수정</button>
-                    <button>삭제</button>
-                </p>
-            </div>
-        </div>
-
-                <div id="DatePage_Schedule_Container">
-            <div>
-                <p>07:00</p>
-                <p>아침운동</p>
-                <p>
-                    <button>수정</button>
-                    <button>삭제</button>
-                </p>
-            </div>
-        </div>
-
-        <div id="DatePage_Schedule_Container">
-            <div>
-                <p>07:00</p>
-                <p>아침운동</p>
-                <p>
-                    <button>수정</button>
-                    <button>삭제</button>
-                </p>
-            </div>
-        </div>
+<%
+    }}
+%>
 
         <div id="DatePage_CreateSchedule_Container">
 

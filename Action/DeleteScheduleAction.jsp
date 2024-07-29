@@ -9,12 +9,7 @@
 
 <%
     request.setCharacterEncoding("utf-8");
-    String scheduleDatetime = request.getParameter("scheduleDatetime");
-    String title = request.getParameter("title");
-    String year = request.getParameter("year");
-    String month = request.getParameter("month");
-    String date = request.getParameter("date");
-
+    String scheduleIdx = request.getParameter("scheduleIdx");
 
     // 작성자 idx 받아오기
     String memberIdx = (String) session.getAttribute("memberIdx");
@@ -25,26 +20,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스케줄 작성</title>
+    <title>스케줄 삭제</title>
 </head>
 <body>
 
 <% 
-    if (scheduleDatetime == null || title.isEmpty() || title == null ) {
+    if (scheduleIdx == null || scheduleIdx.isEmpty()) {
 %>
 
     <script>
-    alert("스케줄 작성 완료")
+    alert("스케줄 삭제 실패")
     history.back()
-    </script>
-
-<% 
-    } else if (memberIdx == null || memberIdx.isEmpty()) {
-%>
-
-    <script>
-    alert("로그인 후 작성해주세요.")
-    location.href="../LogIn.jsp"
     </script>
 
 <% } else {
@@ -55,23 +41,20 @@
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
 
     //SQL 준비
-    String sql = "INSERT INTO Schedule (ScheduleDateTime, ScheduleTitle, memberIdx) VALUES (?, ?, ?)";
+    String sql = "DELETE FROM Schedule WHERE ScheduleIdx = ?";
 
     PreparedStatement query = connect.prepareStatement(sql);
 
-    query.setString(1, scheduleDatetime);
-    query.setString(2, title);
-    query.setString(3, memberIdx);
-
+    query.setString(1, scheduleIdx);
 
     // SQL 전송
 
     query.executeUpdate();
-
     
 %>
+
     <script>
-    alert("스케줄 작성 완료")
+    alert("스케줄 삭제 완료")
     var referrer = document.referrer;
     location.href = referrer;
     </script>
