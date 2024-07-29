@@ -23,7 +23,7 @@
     String year = request.getParameter("year");
     String month = request.getParameter("month");
     String date = request.getParameter("date");
-
+    String grade = request.getParameter("grade");
 
     Class.forName("org.mariadb.jdbc.Driver");
 
@@ -59,7 +59,7 @@
 </html>
 
 <% 
-    } else {
+    } else if (grade == null || grade.isEmpty()) {
     // 해당 날짜의 스케줄 정보 받아오기 sql
     String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND DAY(ScheduleDateTime) = ? AND memberIdx = ? ORDER BY ScheduleDateTime ASC";
     PreparedStatement query = connect.prepareStatement(sql);
@@ -70,7 +70,7 @@
     query.setString(4, memberIdx);
 
     ResultSet result = query.executeQuery();
-
+    
 %> 
     <div id="DatePage_Main_Container">
         <div id="DatePage_Main_MenuContainer">
@@ -126,9 +126,99 @@
                 </p>
             </div>
         </div>
+
 <%
-    }}
+
+    }} else if (Integer.parseInt(grade) == 1) {
+
+    String sql = "SELECT * FROM Schedule JOIN Member ON Schedule.memberIdx = Member.memberIdx WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND DAY(ScheduleDateTime) = ? ORDER BY ScheduleDateTime ASC";
+
+    PreparedStatement query = connect.prepareStatement(sql);
+
+    query.setString(1, year);
+    query.setString(2, month);
+    query.setString(3, date);
+
+    ResultSet result = query.executeQuery();
+
 %>
+
+    <div id="DatePage_Main_Container">
+        <div id="DatePage_Main_MenuContainer">
+            <div>
+                <button id="DatePage_Today_Btn">오늘</button>
+            </div>
+
+            <div>
+                <button onclick="beforeDayEvent()">&lt;</button>
+
+                <button id="DatePage_DateSelect_Btn">
+                    <div id="DatePage_DateView_Container">
+                        <p id="DatePage_DateViewYear_P"><%=year%></p>
+                        <p id="DatePage_DateViewDate_P"><%=month%>월<%=date%>일</p>
+                    </div>
+                </button>
+                
+                <button onclick="afterDayEvent()">&gt;</button>
+            </div>
+
+            <div>
+                <button id="DatePage_Write_Btn">글쓰기</button>
+            </div>
+        </div>
+
+        <div id="DatePage_SelectDay_Container">
+            <div id="DatePage_CloseSelectDay_Container">
+                <button id="DatePage_CloseSelectDay_Btn">X</button>
+            </div>
+            <table border="1" id="Schedule_MainSchedule_Table">
+
+            </table> 
+        </div>
+
+
+<%
+
+    while (result.next()) {
+        String ScheduleDateTime = result.getString("ScheduleDateTime");
+        String ScheduleTitle = result.getString("ScheduleTitle");
+        String ScheduleIdx = result.getString("ScheduleIdx");
+        String scheduleMemberIdx = result.getString("memberIdx");
+        String memberName = result.getString("memberName");
+        
+    if (Integer.parseInt(memberIdx) != Integer.parseInt(scheduleMemberIdx)) {
+%>
+        <div id="DatePage_Schedule_Container" style="background-color:orange">
+            <div>
+                <p><%=ScheduleDateTime%></p>
+                <p><%=ScheduleTitle%></p>
+                <p>
+                    <input value="<%=ScheduleIdx%>" type="hidden">
+                    <button style="display:none">수정</button>
+                    <button name="<%=ScheduleIdx%>" class="Schedule_GetScheduleIdx_Input" style="display:none">삭제</button>
+                    <span><%=memberName%></span>
+                </p>
+            </div>
+        </div>
+<% 
+    } else if (Integer.parseInt(memberIdx) == Integer.parseInt(scheduleMemberIdx)) {
+%>
+    <div id="DatePage_Schedule_Container">
+        <div>
+            <p><%=ScheduleDateTime%></p>
+            <p><%=ScheduleTitle%></p>
+            <p>
+                <input value="<%=ScheduleIdx%>" type="hidden">
+                <button>수정</button>
+                <button name="<%=ScheduleIdx%>" class="Schedule_GetScheduleIdx_Input">삭제</button>
+            </p>
+        </div>
+    </div>
+<%
+    }}}
+%>
+
+<%-- 글쓰기 모달창 --%>
 
         <div id="DatePage_CreateSchedule_Container">
 
