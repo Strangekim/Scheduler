@@ -1,9 +1,11 @@
+// 오늘 날짜 받아오기
+
 const date = new Date();
 const viewYear = date.getFullYear();
 const viewMonth = date.getMonth();
 const viewdate = date.getDate();
 
-
+// url 데이터 받아오기
 const urlParams = new URL(location.href).searchParams;
 
 const year = urlParams.get('year');
@@ -11,78 +13,6 @@ const month = urlParams.get('month');
 const grade = urlParams.get('grade');
 
 var viewNowBtn = document.getElementById("Schedule_ViewNow_Button")
-
-
-// const beforeLast = new Date (viewYear, viewMonth, 0);
-// const thisLast = new Date (viewYear, viewMonth + 1, 0);
-
-// const beforeLastDate = beforeLast.getDate();
-// const beforeLastDay = beforeLast.getDay();
-
-// const thisLastDate = thisLast.getDate();
-// const thisLastDay = thisLast.getDay();
-
-
-// const beforeDates = [];
-// const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
-// const nextDates = [];
-
-// // 지난달 마지막 요일에 토요일일 경우 추가하지 않음
-
-// if (beforeLastDay !== 6) {
-//     for (let i = 0; i < beforeLastDay + 1; i++) {
-//         beforeDates.unshift(beforeLastDate - i);
-//     }
-// }
-
-// // 이번달 마지막 요일에서 필요한만큼 추가함
-
-// for (let i = 1; i < 7 - thisLastDay; i++) {
-//     nextDates.push(i);
-// }
-
-// // 배열 합치기
-
-// const scheduleDates = beforeDates.concat(thisDates, nextDates);
-
-// let scheduleTable = document.getElementById("Schedule_MainSchedule_Table")
-
-// function createCalenderDate () {
-
-//     for (let i = 0; i < 5; i++){
-
-//         let createTr = document.createElement("tr")
-//         createTr.setAttribute('id',`Schedule_ScheduleWeek_Tr${i}`)
-        
-//         for(let j = 0; j < 7; j++){
-//             let createTd = document.createElement("td")
-//             createTd.setAttribute("class", "Schedule_ScheduleDate_Td")
-//             createTd.setAttribute("id", `Schedule_ScheduleDay_Tr${(i*7+j)+1}`)
-//             createTd.textContent = scheduleDates[i * 7 + j];
-
-//             createTr.appendChild(createTd);
-
-//             let createDiv = document.createElement("div")
-//             createTd.appendChild(createDiv);
-
-
-//             if(createTd.textContent == viewdate){
-//                 createTd.style.background = "orange";
-//             }
-
-//         }
-        
-//         scheduleTable.appendChild(createTr);
-//     }
-
-// };
-
-
-// createCalenderDate();
-
-
-
-// 월 선택 페이지 컨트롤
 
 const selectMonthContainer = document.getElementById("Schedule_SelectMonth_Container");
 const selectMonthCloseBtn = document.getElementById("Schedule_SelectMonthClose_Btn");
@@ -189,6 +119,7 @@ function increaseMonthEvent () {
 
 }
 
+// 각 날짜 클릭시 해당 일일페이지 이동
 
 document.querySelectorAll('.thisMonth').forEach(function(td) {
     td.addEventListener('click', setDatePageEvent);

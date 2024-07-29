@@ -1,3 +1,7 @@
+:root {
+    --main-bg-color: black;
+}
+
 #Header_Container_Div {
     width: 100%;
     height: 100px;

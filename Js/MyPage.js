@@ -115,12 +115,21 @@ function checkInputValue () {
     && regPhone.test(inputPhone.value);
 
     SignInBtn.disabled = !checkValue;
+}
 
-    // 회원가입 placeholder 에 명시해줄지???
+SignInBtn.onclick = function(e) {
+    if (confirm("정말 바꾸시겠습니까?")) {
+        const getGrade = document.querySelector("input[name='position']:checked");
+
+        var gradeIdx = "";
+        var defaultTeam = 1;
     
-    if(checkValue) {
-        console.log(0)
-    } else {
-        console.log(1)
+        if (getGrade.id == "Index_Member_Btn"){
+            gradeIdx = 1;
+        } else {
+            gradeIdx = 2;
+        }
+    
+        location.href = "./Action/ChangeMemberAction.jsp?name=" + inputName.value + "&id=" + inputId.value + "&pw=" + inputPw.value + "&phonenumber=" + inputPhone.value + "&gradeIdx=" + gradeIdx + "&teamIdx=" + defaultTeam
     }
 }

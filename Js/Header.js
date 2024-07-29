@@ -188,10 +188,63 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
         }
     }
     
+    // 마이 페이지
+
+} else if (window.location.pathname == "/scheduler/MyPage.jsp") {
+
+    createForthButtons.style.display = "none";
+    createThirdButtons.style.display = "none";
+
+    createFirstButtons.value = "로그아웃"
+    createSecondButtons.value = "HOME"
+
+    createSecondButtons.onclick = function () {
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+    }
+
+    createLogoButton.onclick = function () {
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+    }
+    
     // 일일 페이지
 
-} else if (window.location.pathname == "/scheduler/DatePage.jsp"
-    || window.location.pathname == "/scheduler/MyPage.jsp"){
+} else if (window.location.pathname == "/scheduler/DatePage.jsp"){
+
+    let getGrade = document.getElementById("Schedule_GetGrade_Input").value
+
+    if(getGrade != 2){
+        createForthButtons.style.display = "none"
+    }
+
+    createThirdButtons.style.display = "none";
+
+    createFirstButtons.value = "로그아웃"
+    createSecondButtons.value = "HOME"
+    createForthButtons.value = "팀원스케줄보기"
+
+    createSecondButtons.onclick = function () {
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+    }
+
+    createLogoButton.onclick = function () {
+        console.log(createLogoButton)
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+    }
+
+    createForthButtons.onclick = function () {
+        if (!headerGrade || headerGrade == null) {
+            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 1;
+        } else {
+            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate
+        }
+    }
+
+    }
+
+    if (headerGrade){
+        createForthButtons.style.background = "red";
+    }
+    else if (window.location.pathname == "/scheduler/DatePage.jsp"){
 
     let getGrade = document.getElementById("Schedule_GetGrade_Input").value
 
