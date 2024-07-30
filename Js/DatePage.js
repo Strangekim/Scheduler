@@ -53,27 +53,6 @@ scheduleTitle.onblur = function(e) {
     }
 }
 
-// 일시:시간 생성
-
-var timeSelect = document.getElementById("DatePage_ScheduleTime_Select")
-
-
-for (let i = 0; i <= 23; i++){
-    var createOptinTag = document.createElement("option");
-    timeSelect.appendChild(createOptinTag)
-    createOptinTag.innerHTML = i;
-}
-
-
-
-var minuteSelect = document.getElementById("DatePage_ScheduleMinutes_Select")
-
-
-for (let i = 0; i <= 11; i++){
-    var createOptinTag = document.createElement("option");
-    minuteSelect.appendChild(createOptinTag)
-    createOptinTag.innerHTML = i * 5;
-}
 
 
 // 일 선택 영역 날짜 생성
@@ -83,7 +62,6 @@ const viewYear = date.getFullYear();
 const viewMonth = date.getMonth();
 const viewdate = date.getDate();
 const viewDay= date.getDay();
-console.log(viewDay)
 
 
 // 이전 달 마지막 날, 요일, 이번 달 마지막 날, 요일
@@ -183,23 +161,6 @@ document.getElementById("DatePage_CloseSelectDay_Btn").onclick = function(e){
 }
 
 
-function createScheduleEvent () {
-    let scheduleDatetime = `${urlYear}-${urlMonth}-${urlDate} ${timeSelect.value}:${minuteSelect.value}:00`
-    console.log(scheduleDatetime)
-    location.href = "./Action/CreateScheduleAction.jsp?scheduleDatetime=" + scheduleDatetime + "&title=" + scheduleTitle.value +
-    "&year=" + urlYear + "&month=" + urlMonth + "&date=" + urlDate
-};
-
-
-document.querySelectorAll('.Schedule_GetScheduleIdx_Input').forEach(function(e) {
-    e.addEventListener('click', scheduleDeleteEvent);
-});
-
-function scheduleDeleteEvent (event) {
-    var scheduleIdx = event.target.name;
-
-    location.href = "./Action/DeleteScheduleAction.jsp?scheduleIdx=" + scheduleIdx
-};
 
 
 // 좌우 이동 버튼
@@ -258,3 +219,137 @@ function afterDayEvent () {
     }
 }
 
+
+// 수정 버튼
+
+function fixScheduleEvent(event) {
+    var scheduleIdx = event;
+
+    var myScheduleContainer = document.getElementById("DatePage_Schedule_MyContainer")
+    myScheduleContainer.innerHTML = "";
+
+    // p 태그 생성
+    const createP = document.createElement("p")
+
+    const createSmallP = document.createElement("p")
+    createP.setAttribute("class", "ChangePage_ScheduleTime_P")
+    myScheduleContainer.appendChild(createP)
+
+    const createChildP1 = document.createElement("p") 
+    // 시간
+
+    const createSelect = document.createElement("select")
+
+    createP.appendChild(createChildP1)
+    createChildP1.appendChild(createSelect)
+    createSelect.setAttribute("id", "ChangePage_ScheduleTime_Select")
+
+    var fixTimeSelect = document.getElementById("ChangePage_ScheduleTime_Select")
+
+    for (let i = 0; i <= 23; i++){
+        var createOptinTag = document.createElement("option");
+        fixTimeSelect.appendChild(createOptinTag)
+        createOptinTag.innerHTML = i;
+    }
+
+    // 분
+    const createMinuteSelect = document.createElement("select")
+
+    createChildP1.appendChild(createMinuteSelect)
+    createMinuteSelect.setAttribute("id", "ChangePage_ScheduleMinute_Select")
+
+    var fixMinuteSelect = document.getElementById("ChangePage_ScheduleMinute_Select")
+
+    for (let i = 0; i <= 11; i++){
+        var createOptinTag = document.createElement("option");
+        fixMinuteSelect.appendChild(createOptinTag)
+        createOptinTag.innerHTML = i * 5;
+    }
+
+    // 제목 입력칸
+
+    const createChildP2 = document.createElement("p") 
+    createP.appendChild(createChildP2)
+
+    const createTitleInput = document.createElement("input")
+    createChildP2.appendChild(createTitleInput)
+    createTitleInput.type = "text";
+    createTitleInput.maxLength = "10"
+
+    // 버튼들
+
+    const createChildP3 = document.createElement("p") 
+    createP.appendChild(createChildP3)
+
+    const createFixButtons1 = document.createElement("button")
+    const createFixButtons2 = document.createElement("button")
+
+    createChildP3.appendChild(createFixButtons1)
+    createFixButtons1.innerText = "수정"
+    createChildP3.appendChild(createFixButtons2)
+    createFixButtons2.innerText = "X"
+
+
+    createFixButtons1.onclick = function () {
+    
+        if(confirm("수정하시겠습니까?")){{
+            var scheduleFixDatetime = `${urlYear}-${urlMonth}-${urlDate} ${fixTimeSelect.value}:${fixMinuteSelect.value}:00`
+            console.log(scheduleFixDatetime)
+
+            location.href = "./Action/FixScheduleAction.jsp?scheduleDatetime=" + scheduleFixDatetime + "&title=" + createTitleInput.value + "&scheduleIdx=" + scheduleIdx
+        }}
+    }
+
+    createFixButtons2.onclick = function () {
+        if (urlgrade) {
+            location.href = "./DatePage.jsp?year=" + urlYear + "&month=" + urlMonth + "&date=" + urlDate + "&grade=" + urlgrade        
+        } else {
+            location.href = "./DatePage.jsp?year=" + urlYear + "&month=" + urlMonth + "&date=" + urlDate
+        }
+    }
+}
+
+
+// 일시:시간 생성
+
+var timeSelect = document.getElementById("DatePage_ScheduleTime_Select")
+
+
+for (let i = 0; i <= 23; i++){
+    var createOptinTag = document.createElement("option");
+    timeSelect.appendChild(createOptinTag)
+    createOptinTag.innerHTML = i;
+}
+
+
+
+var minuteSelect = document.getElementById("DatePage_ScheduleMinutes_Select")
+
+
+for (let i = 0; i <= 11; i++){
+    var createOptinTag = document.createElement("option");
+    minuteSelect.appendChild(createOptinTag)
+    createOptinTag.innerHTML = i * 5;
+}
+
+
+
+function createScheduleEvent () {
+    let scheduleDatetime = `${urlYear}-${urlMonth}-${urlDate} ${timeSelect.value}:${minuteSelect.value}:00`
+    console.log(scheduleDatetime)
+    location.href = "./Action/CreateScheduleAction.jsp?scheduleDatetime=" + scheduleDatetime + "&title=" + scheduleTitle.value +
+    "&year=" + urlYear + "&month=" + urlMonth + "&date=" + urlDate
+};
+
+
+document.querySelectorAll('.Schedule_GetScheduleIdx_Input').forEach(function(e) {
+    e.addEventListener('click', scheduleDeleteEvent);
+});
+
+function scheduleDeleteEvent (event) {
+    var scheduleIdx = event.target.name;
+
+    if (confirm("정말 삭제하시겠습니까?")){ 
+    location.href = "./Action/DeleteScheduleAction.jsp?scheduleIdx=" + scheduleIdx
+    };
+};

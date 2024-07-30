@@ -12,6 +12,10 @@
 
 <%@ page import="java.util.Calendar"%>
 
+<%@ page import="java.util.*"%>
+
+<%@ page import="java.sql.Timestamp"%>
+
 <%  
     request.setCharacterEncoding("utf-8");
     
@@ -55,8 +59,6 @@
     alert("잘못된 접근입니다.")
     location.href="LogIn.jsp"
     </script>
-</body>
-</html>
 
 <% 
     } else if (grade == null || grade.isEmpty()) {
@@ -111,17 +113,16 @@
     while (result.next()) {
         String ScheduleDateTime = result.getString("ScheduleDateTime");
         String ScheduleTitle = result.getString("ScheduleTitle");
-        String ScheduleIdx = result.getString("ScheduleIdx");
-    
+        String ScheduleIdx = result.getString("ScheduleIdx"); 
 %>
     
-        <div id="DatePage_Schedule_Container">
+        <div class="DatePage_Schedule_Container" id="DatePage_Schedule_MyContainer" name="<%=ScheduleIdx%>">
             <div>
                 <p><%=ScheduleDateTime%></p>
                 <p><%=ScheduleTitle%></p>
                 <p>
                     <input value="<%=ScheduleIdx%>" type="hidden" >
-                    <button>수정</button>
+                    <button onclick="fixScheduleEvent(<%=ScheduleIdx%>)">수정</button>
                     <button name="<%=ScheduleIdx%>" class="Schedule_GetScheduleIdx_Input">삭제</button>
                 </p>
             </div>
@@ -188,13 +189,13 @@
         
     if (Integer.parseInt(memberIdx) != Integer.parseInt(scheduleMemberIdx)) {
 %>
-        <div id="DatePage_Schedule_Container" style="background-color:orange">
+        <div class="DatePage_Schedule_Container" style="background-color:orange" name="<%=ScheduleIdx%>">
             <div>
                 <p><%=ScheduleDateTime%></p>
                 <p><%=ScheduleTitle%></p>
                 <p>
                     <input value="<%=ScheduleIdx%>" type="hidden">
-                    <button style="display:none">수정</button>
+                    <button name="<%=ScheduleIdx%>" style="display:none">수정</button>
                     <button name="<%=ScheduleIdx%>" class="Schedule_GetScheduleIdx_Input" style="display:none">삭제</button>
                     <span><%=memberName%></span>
                 </p>
@@ -203,13 +204,14 @@
 <% 
     } else if (Integer.parseInt(memberIdx) == Integer.parseInt(scheduleMemberIdx)) {
 %>
-    <div id="DatePage_Schedule_Container">
+    <div class="DatePage_Schedule_Container" id="DatePage_Schedule_MyContainer">
+        <input value="<%=ScheduleIdx%>" type="hidden" id="Schedule_GetScheduleIdx_Input">
         <div>
             <p><%=ScheduleDateTime%></p>
             <p><%=ScheduleTitle%></p>
             <p>
                 <input value="<%=ScheduleIdx%>" type="hidden">
-                <button>수정</button>
+                <button onclick="fixScheduleEvent(<%=ScheduleIdx%>)">수정</button>
                 <button name="<%=ScheduleIdx%>" class="Schedule_GetScheduleIdx_Input">삭제</button>
             </p>
         </div>
@@ -242,7 +244,7 @@
                     </td>
 
                     <td>
-                    <button id="DataPage_CloseTable_Btn">X</button>
+                        <button id="DataPage_CloseTable_Btn">X</button>
                     </td>
 
                 </tr>

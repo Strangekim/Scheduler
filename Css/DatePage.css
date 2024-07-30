@@ -72,7 +72,7 @@
 }
 
 
-#DatePage_Schedule_Container {
+.DatePage_Schedule_Container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -85,13 +85,13 @@
     font-size: 15px;
 }
 
-#DatePage_Schedule_Container div {
+.DatePage_Schedule_Container div {
     display: flex;
     /* background-color: burlywood; */
     justify-content: space-between;
 }
 
-#DatePage_Schedule_Container div button {
+.DatePage_Schedule_Container div button {
     background-color: gray;
     color: white;
 }
@@ -172,6 +172,13 @@
 #Schedule_MainSchedule_Table:nth-child(2) tr td:nth-child(7){
     color: blue
 }
+
+.ChangePage_ScheduleTime_P {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
 
 
 

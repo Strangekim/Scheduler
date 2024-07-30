@@ -45,29 +45,17 @@
 
     int week = cal.get(Calendar.DAY_OF_WEEK);
 
-    String gradeIdx = (String) session.getAttribute("gradeIdx");
-    String memberIdx = (String) session.getAttribute("memberIdx");
-
-
     Class.forName("org.mariadb.jdbc.Driver");
 
     // DB 통신 연결
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
 
-    // 게시글 전체 정보 받아오기 sql
-    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND memberIdx = ? ORDER BY ScheduleDateTime ASC";
-    PreparedStatement query = connect.prepareStatement(sql);
-    
-    query.setString(1, sy);
-    query.setString(2, sm);
-    query.setString(3, memberIdx);
+    String gradeIdx = (String) session.getAttribute("gradeIdx");
+    String memberIdx = (String) session.getAttribute("memberIdx");
 
-    ResultSet result = query.executeQuery();
-
-    session = request.getSession();
-
-
+    String grade = request.getParameter("grade");
 %>
+
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -78,6 +66,17 @@
     <link rel="stylesheet" type="text/css" href="Css/SchedulePage.css">
 
 </head>
+
+<%
+    if(memberIdx == null || memberIdx.isEmpty()){
+%>
+    <script>
+    alert("잘못된 접근입니다.")
+    location.href="LogIn.jsp"
+    </script>
+<% 
+    } 
+%>
 
 <body>
 
@@ -107,21 +106,21 @@
                 </tr>
 
                 <tr>
-                    <th><button>1</button></th>
-                    <th><button>2</button></th>
-                    <th><button>3</button></th>
-                    <th><button>4</button></th>
-                    <th><button>5</button></th>
-                    <th><button>6</button></th>                 
+                    <th><button onclick="changeMonthEvent(1)">1</button></th>
+                    <th><button onclick="changeMonthEvent(2)">2</button></th>
+                    <th><button onclick="changeMonthEvent(3)">3</button></th>
+                    <th><button onclick="changeMonthEvent(4)">4</button></th>
+                    <th><button onclick="changeMonthEvent(5)">5</button></th>
+                    <th><button onclick="changeMonthEvent(6)">6</button></th>                 
                 </tr>
 
                 <tr>
-                    <th><button>7</button></th>
-                    <th><button>8</button></th>
-                    <th><button>9</button></th>
-                    <th><button>10</button></th>
-                    <th><button>11</button></th>
-                    <th><button>12</button></th>                 
+                    <th><button onclick="changeMonthEvent(7)">7</button></th>
+                    <th><button onclick="changeMonthEvent(8)">8</button></th>
+                    <th><button onclick="changeMonthEvent(9)">9</button></th>
+                    <th><button onclick="changeMonthEvent(10)">10</button></th>
+                    <th><button onclick="changeMonthEvent(11)">11</button></th>
+                    <th><button onclick="changeMonthEvent(12)">12</button></th>                 
                 </tr>
 
 
@@ -152,6 +151,20 @@
             </tr>
 
 <%
+    if(grade == null) {
+
+    // 게시글 전체 정보 받아오기 sql
+    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND memberIdx = ? ORDER BY ScheduleDateTime ASC";
+    PreparedStatement query = connect.prepareStatement(sql);
+    
+    query.setString(1, sy);
+    query.setString(2, sm);
+    query.setString(3, memberIdx);
+
+    ResultSet result = query.executeQuery();
+
+    session = request.getSession();
+
     // 스케줄 데이터 처리
     Map<Integer, Integer> scheduleCounts = new HashMap<>(); // 날짜별 스케줄 개수 저장
 
@@ -164,9 +177,7 @@
         // 스케줄 개수 카운트
         scheduleCounts.put(day, scheduleCounts.getOrDefault(day, 0) + 1);
     }
-%>
 
-<%
     // 달력 출력
     // 1일 앞 달
     Calendar preCal = (Calendar) cal.clone();
@@ -207,6 +218,72 @@
         out.print("<td class='gray'>" + (n++) + "</td>");
     }
     out.print("</tr>");
+    }
+
+
+
+    // 팀원 스케줄 보기 버튼 활성화시
+
+    else if (Integer.parseInt(grade) == 1){
+
+    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? ORDER BY ScheduleDateTime ASC";
+    PreparedStatement query = connect.prepareStatement(sql);
+    
+    query.setString(1, sy);
+    query.setString(2, sm);
+
+    ResultSet result = query.executeQuery();
+
+    session = request.getSession();
+
+    Map<Integer, Integer> scheduleCounts = new HashMap<>(); 
+
+    while (result.next()) {
+        Timestamp timestamp = result.getTimestamp("ScheduleDateTime");
+        LocalDate scheduleDate = timestamp.toLocalDateTime().toLocalDate();
+        int day = scheduleDate.getDayOfMonth();
+
+        scheduleCounts.put(day, scheduleCounts.getOrDefault(day, 0) + 1);
+    }
+
+
+    Calendar preCal = (Calendar) cal.clone();
+    preCal.add(Calendar.DATE, -(week - 1));
+    int preDate = preCal.get(Calendar.DATE);
+
+    out.print("<tr>");
+    for (int i = 1; i < week; i++) {
+        out.print("<td class='gray'>" + (preDate++) + "</td>");
+    }
+
+    // 1일부터 말일까지 출력
+    int lastDay = cal.getActualMaximum(Calendar.DATE);
+    String cls;
+
+    for (int i = 1; i <= lastDay; i++) {
+        cls = year == ty && month == tm && i == td ? "today" : "";
+
+        // 해당 날짜의 스케줄 개수 가져오기
+        int scheduleCount = scheduleCounts.getOrDefault(i, 0);
+
+        out.print("<td class='thisMonth' data-day='" + i + "'>");
+        out.print("<span class='Schedule_ScheduleDate_Span'>" + i + "</span>");
+        out.print("<div class='Schedule_ScheduleDate_Td'>" + scheduleCount + "</div>");
+        out.print("</td>");
+
+        if (lastDay != i && (++week) % 7 == 1) {
+            out.print("</tr><tr>");
+        }
+    }
+
+    // 마지막 주 마지막 일자 다음 처리
+    int n = 1;
+    for (int i = (week - 1) % 7; i < 6; i++) {
+        // out.print("<td>&nbsp;</td>");
+        out.print("<td class='gray'>" + (n++) + "</td>");
+    }
+    out.print("</tr>");
+    }
 %>
 
     

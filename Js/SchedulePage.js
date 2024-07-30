@@ -2,7 +2,7 @@
 
 const date = new Date();
 const viewYear = date.getFullYear();
-const viewMonth = date.getMonth();
+const viewMonth = date.getMonth() + 1;
 const viewdate = date.getDate();
 
 // url 데이터 받아오기
@@ -46,7 +46,7 @@ var selectYearBtn = document.getElementById("Schdule_SelectYear_Btn");
 
 selectYearBtn.innerHTML = year;
 
-selectYearBtn.onclick = function(e){
+selectYearBtn.onclick = function event(e){
 
     selectMotnTable.innerHTML = "";
     console.log(selectYearBtn.innerHTML)
@@ -67,7 +67,6 @@ selectYearBtn.onclick = function(e){
             console.log(selectYearBtn.innerHTML)
         }
         };
-
         console.log(selectYearBtn.innerHTML)
 }
 
@@ -119,12 +118,24 @@ function increaseMonthEvent () {
 
 }
 
-// 각 날짜 클릭시 해당 일일페이지 이동
+//오늘 날짜에 해당하는 배경색 변경
 
-document.querySelectorAll('.thisMonth').forEach(function(td) {
+var thisMonth = document.querySelectorAll('.thisMonth')
+
+for(var i = 0; i < thisMonth.length; i++){
+   var changeToday = thisMonth[i].getAttribute("data-day");
+
+   if(changeToday == viewdate && viewYear == year && viewMonth == month) {
+    thisMonth[i].style.backgroundColor = "tomato";
+   }
+}
+
+thisMonth.forEach(function(td) {
     td.addEventListener('click', setDatePageEvent);
 });
 
+
+// 각 날짜 클릭시 해당 일일페이지 이동
 function setDatePageEvent(e) {
 
     var target = e.target;
@@ -138,4 +149,10 @@ function setDatePageEvent(e) {
     console.log(date);
 
     location.href = "./DatePage.jsp?year=" + year + "&month=" + month + "&date=" + date
+}
+
+// 월 선택 영역
+
+function changeMonthEvent(e) {
+    location.href = "./SchedulePage.jsp?year=" + selectYearBtn.innerHTML + "&month=" + e 
 }

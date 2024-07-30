@@ -182,9 +182,9 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
 
     createForthButtons.onclick = function () {
         if (!headerGrade || headerGrade == null) {
-            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1;
+            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1;
         } else {
-            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth
         }
     }
     
