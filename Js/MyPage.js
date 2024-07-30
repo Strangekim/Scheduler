@@ -120,7 +120,7 @@ function checkInputValue () {
 SignInBtn.onclick = function(e) {
     if (confirm("정말 바꾸시겠습니까?")) {
         const getGrade = document.querySelector("input[name='position']:checked");
-
+        console.log(getGrade)
         var gradeIdx = "";
         var defaultTeam = 1;
     
@@ -129,7 +129,8 @@ SignInBtn.onclick = function(e) {
         } else {
             gradeIdx = 2;
         }
-    
-        location.href = "./Action/ChangeMemberAction.jsp?name=" + inputName.value + "&id=" + inputId.value + "&pw=" + inputPw.value + "&phonenumber=" + inputPhone.value + "&gradeIdx=" + gradeIdx + "&teamIdx=" + defaultTeam
+        console.log(gradeIdx)
+        location.href =  "./Action/ChangeMemberAction.jsp?id=" + inputId.value + "&pw=" + inputPw.value + "&phonenumber=" + inputPhone.value + "&gradeIdx=" + gradeIdx + "&teamIdx=" + defaultTeam
+       
     }
 }

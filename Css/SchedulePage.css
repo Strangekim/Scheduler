@@ -104,3 +104,10 @@ table tr th:nth-child(7),table tr td:nth-child(7) {
 .thisMonth:hover {
     background-color: aquamarine;
 }
+
+.Schedule_ScheduleDate_Td{
+    font-size: 23px;
+    display: flex;
+    justify-content: center;
+    color: black;
+}

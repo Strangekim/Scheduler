@@ -21,7 +21,7 @@
     String memberIdx = (String) session.getAttribute("memberIdx");
 
     //SQL 준비
-    String sql = "SELECT memberName, memberPhoneNumber, gradeIdx FROM Member WHERE memberIdx = ?";
+    String sql = "SELECT memberId, memberPhoneNumber, gradeIdx FROM Member WHERE memberIdx = ?";
 
     PreparedStatement query = connect.prepareStatement(sql);
     
@@ -58,7 +58,7 @@
 
 <%
     while (result.next()) {
-        String memberName = result.getString("memberName");
+        String memberId = result.getString("memberId");
         String memberPhoneNumber = result.getString("memberPhoneNumber");
         String gradeIdx = result.getString("gradeIdx");
     
@@ -71,7 +71,7 @@
 
             <div id="Index_InputBox_Container">
 
-                <input type="text" placeholder="아이디" maxlength="20" id="Index_Input_Id" value="<%=memberName%>">
+                <input type="text" placeholder="아이디" maxlength="20" id="Index_Input_Id" value="<%=memberId%>">
                 <input type="text" placeholder="전화번호" maxlength="12" id="Index_Input_Phonenumber" value="<%=memberPhoneNumber%>">
                 <input type="password" placeholder="비밀번호" maxlength="20" id="Index_Input_Pw">
                 <input type="password" placeholder="비밀번호 확인" maxlength="20" id="Index_Input_Pwcheck">

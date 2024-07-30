@@ -133,7 +133,7 @@ function setDatePageEvent(e) {
         target = target.parentElement;
     }
 
-    var date = target.innerText
+    var date = target.getAttribute("data-day");
 
     console.log(date);
 

@@ -11,7 +11,9 @@
 
 <%@ page import="java.time.LocalDate" %>
 
-<%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.*"%>
+
+<%@ page import="java.sql.Timestamp"%>
 
 
 <%  
@@ -53,7 +55,7 @@
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
 
     // 게시글 전체 정보 받아오기 sql
-    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND memberIdx = ?";
+    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND memberIdx = ? ORDER BY ScheduleDateTime ASC";
     PreparedStatement query = connect.prepareStatement(sql);
     
     query.setString(1, sy);
@@ -150,45 +152,63 @@
             </tr>
 
 <%
+    // 스케줄 데이터 처리
+    Map<Integer, Integer> scheduleCounts = new HashMap<>(); // 날짜별 스케줄 개수 저장
 
     while (result.next()) {
-        String ScheduleDateTime = result.getString("ScheduleDateTime");
-    
+        // String ScheduleDateTime = result.getString("ScheduleDateTime");
+        Timestamp timestamp = result.getTimestamp("ScheduleDateTime");
+        LocalDate scheduleDate = timestamp.toLocalDateTime().toLocalDate();
+        int day = scheduleDate.getDayOfMonth();
+
+        // 스케줄 개수 카운트
+        scheduleCounts.put(day, scheduleCounts.getOrDefault(day, 0) + 1);
+    }
 %>
-    <%=ScheduleDateTime%>
-<%          }
-			// 1일 앞 달
-			Calendar preCal = (Calendar)cal.clone();
-			preCal.add(Calendar.DATE, -(week-1));
-			int preDate = preCal.get(Calendar.DATE);
-			
-			out.print("<tr>");
-			// 1일 앞 부분
-			for(int i=1; i<week; i++) {
-				//out.print("<td>&nbsp;</td>");
-				out.print("<td class='gray'>"+(preDate++)+"</td>");
-			}
-			
-			// 1일부터 말일까지 출력
-			int lastDay = cal.getActualMaximum(Calendar.DATE);
-			String cls;
-			for(int i=1; i<=lastDay; i++) {
-				cls = year==ty && month==tm && i==td ? "today":"";
-				
-				out.print("<td class='thisMonth'>"+"<span>"+i+"</span>"+"<div class='Schedule_ScheduleDate_Td'></div>"+"</td>");
-				if(lastDay != i && (++week)%7 == 1) {
-					out.print("</tr><tr>");
-				}
-			}
-			
-			// 마지막 주 마지막 일자 다음 처리
-			int n = 1;
-			for(int i = (week-1)%7; i<6; i++) {
-				// out.print("<td>&nbsp;</td>");
-				out.print("<td class='gray'>"+(n++)+"</td>");
-			}
-			out.print("</tr>");
-%>	
+
+<%
+    // 달력 출력
+    // 1일 앞 달
+    Calendar preCal = (Calendar) cal.clone();
+    preCal.add(Calendar.DATE, -(week - 1));
+    int preDate = preCal.get(Calendar.DATE);
+
+    out.print("<tr>");
+    // 1일 앞 부분
+    for (int i = 1; i < week; i++) {
+        //out.print("<td>&nbsp;</td>");
+        out.print("<td class='gray'>" + (preDate++) + "</td>");
+    }
+
+    // 1일부터 말일까지 출력
+    int lastDay = cal.getActualMaximum(Calendar.DATE);
+    String cls;
+
+    for (int i = 1; i <= lastDay; i++) {
+        cls = year == ty && month == tm && i == td ? "today" : "";
+
+        // 해당 날짜의 스케줄 개수 가져오기
+        int scheduleCount = scheduleCounts.getOrDefault(i, 0);
+
+        out.print("<td class='thisMonth' data-day='" + i + "'>");
+        out.print("<span class='Schedule_ScheduleDate_Span'>" + i + "</span>");
+        out.print("<div class='Schedule_ScheduleDate_Td'>" + scheduleCount + "</div>");
+        out.print("</td>");
+
+        if (lastDay != i && (++week) % 7 == 1) {
+            out.print("</tr><tr>");
+        }
+    }
+
+    // 마지막 주 마지막 일자 다음 처리
+    int n = 1;
+    for (int i = (week - 1) % 7; i < 6; i++) {
+        // out.print("<td>&nbsp;</td>");
+        out.print("<td class='gray'>" + (n++) + "</td>");
+    }
+    out.print("</tr>");
+%>
+
     
 
 
