@@ -42,21 +42,9 @@
 
 </head>
 
-<%-- <%
-    if (!result.next()) {
-%>
-    <body>
-        <script>
-        alert("잘못된 접근입니다.")
-        location.href="LogIn.jsp"
-        </script>
-    </body>
-</html>
-
 <%
-   } else {  --%>
+    if (memberIdx != null) {
 
-<%
     while (result.next()) {
         String memberId = result.getString("memberId");
         String memberPhoneNumber = result.getString("memberPhoneNumber");
@@ -115,11 +103,22 @@
           
     </main>
 
-    <script src="Js/MyPage.js"></script>
+    <script src="Js/CommonVar.js"></script>
     <script src="Js/Header.js"></script>
-</body>
-</html>
+    <script src="Js/MyPage.js"></script>
+
+<%
+    }} else {
+%>
+
+    <script>
+    alert("잘못된 접근입니다.")
+    history.back();
+    </script>
 
 <%
     }
 %>
+</body>
+</html>
+

@@ -44,8 +44,9 @@
         </div>
           
     </main>
-
-    <script src="Js/SignIn.js"></script>
+    <script src="Js/CommonVar.js"></script>
     <script src="Js/Header.js"></script>
+    <script src="Js/SignIn.js"></script>
+
 </body>
 </html>

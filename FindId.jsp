@@ -34,7 +34,9 @@
           
     </main>
 
-    <script src="Js/FindId.js"></script>
+    <script src="Js/CommonVar.js"></script>
     <script src="Js/Header.js"></script>
+    <script src="Js/FindId.js"></script>
+
 </body>
 </html>

@@ -165,13 +165,14 @@
     background-color: beige;
 }
 
-#Schedule_MainSchedule_Table:nth-child(2) tr td:nth-child(1){
-    color: red
+#Schedule_MainSchedule_Table:nth-child(2) tr td:hover{
+    background-color: red;
 }
 
+/*
 #Schedule_MainSchedule_Table:nth-child(2) tr td:nth-child(7){
     color: blue
-}
+} */
 
 .ChangePage_ScheduleTime_P {
     display: flex;

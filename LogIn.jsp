@@ -43,7 +43,9 @@
           
     </main>
 
-    <script src="Js/LogIn.js"></script>
+    <script src="Js/CommonVar.js"></script>
     <script src="Js/Header.js"></script>
+    <script src="Js/LogIn.js"></script>
+
 </body>
 </html>

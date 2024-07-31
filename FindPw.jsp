@@ -34,7 +34,8 @@
           
     </main>
 
-    <script src="Js/FindPw.js"></script>
+    <script src="Js/CommonVar.js"></script>
     <script src="Js/Header.js"></script>
+    <script src="Js/FindPw.js"></script>
 </body>
 </html>

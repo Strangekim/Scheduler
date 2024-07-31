@@ -283,8 +283,8 @@
         </div>
 
     </div>
-
-    <script src="Js/DatePage.js"></script>
+    <script src="Js/CommonVar.js"></script>
     <script src="Js/Header.js"></script>
+    <script src="Js/DatePage.js"></script>
 </body>
 </html>

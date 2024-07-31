@@ -286,14 +286,13 @@
     }
 %>
 
-    
-
-
         </table>
     </div>
 
-    <script src="Js/SchedulePage.js"></script>
+    <script src="Js/CommonVar.js"></script>
     <script src="Js/Header.js"></script>
+    <script src="Js/SchedulePage.js"></script>
+
     <script>
     </script>
 

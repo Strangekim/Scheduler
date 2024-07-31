@@ -1,10 +1,8 @@
-
 // 헤더 태그 추가
 const createHeaderTag = document.createElement("header")
 createHeaderTag.setAttribute("id", "Main_Header")
 
 let bodyTag = document.querySelector("body");
-
 
 bodyTag.prepend(createHeaderTag)
 
@@ -115,16 +113,9 @@ createButtonsDiv.appendChild(createForthButtons)
 // 경로에 따라 나올 버튼 선택
 function headerBtnDisplay () {
 
-var date = new Date();
-var viewYear = date.getFullYear();
-var viewMonth = Number(date.getMonth()) + 1;
-
-const headerUrlParams = new URL(location.href).searchParams;
-
-const headerYear = headerUrlParams.get('year');
-const headerMonth = headerUrlParams.get('month');
-const headerDate = headerUrlParams.get('date');
-const headerGrade = headerUrlParams.get('grade');
+// var date = new Date();
+// var viewYear = date.getFullYear();
+// var viewMonth = Number(date.getMonth()) + 1;
 
     // 로그인 페이지
 if (window.location.pathname == "/scheduler/LogIn.jsp") {
@@ -177,7 +168,11 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
     }
 
     createLogoButton.onclick = function () {
-        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+        if (headerGrade) {
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1; 
+            } else {
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+            }
     }
 
     createForthButtons.onclick = function () {
@@ -223,12 +218,19 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
     createForthButtons.value = "팀원스케줄보기"
 
     createSecondButtons.onclick = function () {
-        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+        if (headerGrade) {
+        location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1; 
+        } else {
+        location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth
+        }
     }
 
     createLogoButton.onclick = function () {
-        console.log(createLogoButton)
-        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+        if (headerGrade) {
+            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1; 
+            } else {
+            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth
+            }
     }
 
     createForthButtons.onclick = function () {
@@ -243,40 +245,31 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
 
     if (headerGrade){
         createForthButtons.style.background = "red";
-    }
-    else if (window.location.pathname == "/scheduler/DatePage.jsp"){
+    } else if (window.location.pathname == "/scheduler/DatePage.jsp"){
+        let getGrade = document.getElementById("Schedule_GetGrade_Input").value
+        if(getGrade != 2){
+            createForthButtons.style.display = "none"
+        }
+        createThirdButtons.style.display = "none";
+        createFirstButtons.value = "로그아웃"
+        createSecondButtons.value = "HOME"
+        createForthButtons.value = "팀원스케줄보기"
 
-    let getGrade = document.getElementById("Schedule_GetGrade_Input").value
-
-    if(getGrade != 2){
-        createForthButtons.style.display = "none"
-    }
-
-    createThirdButtons.style.display = "none";
-
-    createFirstButtons.value = "로그아웃"
-    createSecondButtons.value = "HOME"
-    createForthButtons.value = "팀원스케줄보기"
-
-    createSecondButtons.onclick = function () {
-        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
-    }
-
-    createLogoButton.onclick = function () {
-        console.log(createLogoButton)
-        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
-    }
-
-    createForthButtons.onclick = function () {
-        if (!headerGrade || headerGrade == null) {
-            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 1;
-        } else {
-            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate
+        createSecondButtons.onclick = function () {
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+        }
+        createLogoButton.onclick = function () {
+            console.log(createLogoButton)
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+        }
+        createForthButtons.onclick = function () {
+            if (!headerGrade || headerGrade == null) {
+                location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 1;
+            } else {
+                location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate
+            }
         }
     }
-
-    }
-
     if (headerGrade){
         createForthButtons.style.background = "red";
     }
