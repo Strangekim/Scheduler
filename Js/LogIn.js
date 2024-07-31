@@ -7,11 +7,11 @@ loginBtn.disabled = true;
 
 inputId.onfocus = function(e) {
     inputId.placeholder = "";
-}
+};
 
 inputPw.onfocus = function(e) {
     inputPw.placeholder = "";
-}
+};
 
 inputId.onblur = function(e) {
 
@@ -26,7 +26,7 @@ inputId.onblur = function(e) {
             inputId.style.borderColor = "black"
             loginBtn.disabled = true;
     }
-}
+};
 
 inputPw.onblur = function(e) {
 
@@ -40,7 +40,7 @@ inputPw.onblur = function(e) {
         loginBtn.disabled = false; 
     }
 
-    if(inputPw.value.length < 4 && inputPw.value.length != 0){
+    if(!regPW.test(inputPw.value)){
         inputPw.value = ""
         inputPw.style.borderColor = "red"
         inputPw.placeholder = "4글자 이상 입력해주세요!"
@@ -50,13 +50,11 @@ inputPw.onblur = function(e) {
     }
 
 
-}
+};
 
+// 로그인 버튼 이벤트
 function logInActionEvent() {
-
     location.href="./Action/LogInAction.jsp?id=" + inputId.value + "&pw=" + inputPw.value
-
-
-}
+};
 
 

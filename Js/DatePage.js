@@ -18,7 +18,6 @@ const thisLastDate = thisLast.getDate();
 const thisLastDay = thisLast.getDay();
 
 // 일 선택 영역 날짜 생성
-
 const beforeDates = [];
 const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
 const nextDates = [];
