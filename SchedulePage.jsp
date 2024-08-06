@@ -12,11 +12,40 @@
 <%@ page import="java.time.LocalDate" %>
 
 <%@ page import="java.util.*"%>
+<%@ page import="java.util.regex.*"%>
 
 <%@ page import="java.sql.Timestamp"%>
 
+<!DOCTYPE html>
+<html lang="kr">
+<head>
 
-<%  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스케줄 페이지</title>
+    <link rel="stylesheet" type="text/css" href="Css/SchedulePage.css">
+
+</head>
+
+<%
+    String gradeIdx = (String) session.getAttribute("gradeIdx");
+    String memberIdx = (String) session.getAttribute("memberIdx");
+
+    String grade = request.getParameter("grade");
+
+    String regGradeIdx = "^[12]$";
+    boolean regGrade = Pattern.matches(regGradeIdx, gradeIdx);
+    String regMemberIdx = "^[0-9]*$";
+    boolean regMember = Pattern.matches(regMemberIdx, memberIdx);    
+
+    if(!regGrade|| !regMember || memberIdx == null || memberIdx.isEmpty()){       
+%>
+    <script>
+    alert("잘못된 접근입니다.")
+    location.href="LogIn.jsp"
+    </script>
+<% 
+    } 
     request.setCharacterEncoding("utf-8");
 
     Calendar cal = Calendar.getInstance();
@@ -45,38 +74,13 @@
 
     int week = cal.get(Calendar.DAY_OF_WEEK);
 
+
     Class.forName("org.mariadb.jdbc.Driver");
 
-    // DB 통신 연결
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
 
-    String gradeIdx = (String) session.getAttribute("gradeIdx");
-    String memberIdx = (String) session.getAttribute("memberIdx");
-
-    String grade = request.getParameter("grade");
 %>
 
-<!DOCTYPE html>
-<html lang="kr">
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스케줄 페이지</title>
-    <link rel="stylesheet" type="text/css" href="Css/SchedulePage.css">
-
-</head>
-
-<%
-    if(memberIdx == null || memberIdx.isEmpty()){
-%>
-    <script>
-    alert("잘못된 접근입니다.")
-    location.href="LogIn.jsp"
-    </script>
-<% 
-    } 
-%>
 
 <body>
 
@@ -222,7 +226,7 @@
 
     // 팀원 스케줄 보기 버튼 활성화시
 
-    else if (Integer.parseInt(grade) == 1){
+    else if (Integer.parseInt(grade) == 1 && Integer.parseInt(gradeIdx) == 2){
 
     String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? ORDER BY ScheduleDateTime ASC";
     PreparedStatement query = connect.prepareStatement(sql);
@@ -281,6 +285,15 @@
         out.print("<td class='gray'>" + (n++) + "</td>");
     }
     out.print("</tr>");
+    } else if (Integer.parseInt(gradeIdx) != 2) {
+%>
+
+    <script>
+    alert("잘못된 접근입니다.")
+    location.href="LogIn.jsp"
+    </script>    
+
+<%
     }
 %>
 

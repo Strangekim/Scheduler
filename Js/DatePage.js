@@ -38,12 +38,9 @@ function writeModal() {
         }
 
     }
-
     colseContainerBtn.onclick = function(e) {
         createScheduleContainer.style.display ="none";
     }
-
-
     // 예외처리
 
     scheduleTitle.placeholder = "제목을 입력해주십시오."
@@ -67,7 +64,7 @@ function writeModal() {
 
 };
 
-// 달력 생성 (현재는 이번달 달력만 출력)
+// 달력 생성 , 클릭시 일일 페이지 이동
 function createCalenderDate () {
 
     for (let i = 0; i < 5; i++){
@@ -77,7 +74,17 @@ function createCalenderDate () {
         for(let j = 0; j < 7; j++){
             let createTd = document.createElement("td")
             createTd.setAttribute("class", "Schedule_ScheduleDate_Td")
+            createTd.setAttribute("id", `Schedule_ScheduleDay_Tr${(i*7+j)+1}`)
             createTd.textContent = scheduleDates[i * 7 + j];
+
+            createTd.onclick = function(e){
+                var getDay = e.target.innerText;
+                if (headerGrade == 1) {
+                location.href = "./DatePage.jsp?year=" + headerYear + "&month=" + headerMonth + "&date=" + getDay + "&grade=" + headerGrade
+                } else {
+                location.href = "./DatePage.jsp?year=" + headerYear + "&month=" + headerMonth + "&date=" + getDay         
+                }
+            }
 
             createTr.appendChild(createTd);
 
@@ -89,22 +96,6 @@ function createCalenderDate () {
             }
         }
         scheduleTable.appendChild(createTr);
-    }
-};
-
-// 일일 페이지 이동
-function moveDate () {
-    document.querySelectorAll('.Schedule_ScheduleDate_Td').forEach(function(e) {
-        e.addEventListener('click', moveDateEvent);
-    });
-
-    function moveDateEvent (event) {
-        var getDay = event.target.innerText;
-        if (headerGrade == 1) {
-        location.href = "./DatePage.jsp?year=" + headerYear + "&month=" + headerMonth + "&date=" + getDay + "&grade=" + headerGrade
-        } else {
-        location.href = "./DatePage.jsp?year=" + headerYear + "&month=" + headerMonth + "&date=" + getDay         
-        }
     }
 };
 
@@ -128,9 +119,10 @@ function dateModal () {
 
 // 수정 버튼
 function fixScheduleEvent(event) {
+
     var scheduleIdx = event;
 
-    var myScheduleContainer = document.getElementById("DatePage_Schedule_MyContainer")
+    var myScheduleContainer = document.getElementById(`DatePage_Schedule_MyContainer${event}`)
     myScheduleContainer.innerHTML = "";
 
     // p 태그 생성
@@ -316,7 +308,6 @@ goTodayBtn.onclick = function () {
 
 writeModal();
 createCalenderDate();
-moveDate();
 dateModal();
 deleteSchedule();
 createSelect();

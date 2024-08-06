@@ -59,8 +59,8 @@
 
             <div id="Index_InputBox_Container">
 
-                <input type="text" placeholder="아이디" maxlength="20" id="Index_Input_Id" value="<%=memberId%>">
-                <input type="text" placeholder="전화번호" maxlength="12" id="Index_Input_Phonenumber" value="<%=memberPhoneNumber%>">
+                <input type="text" placeholder="아이디" maxlength="20" id="Index_Input_Id" value="<%=memberId%>" disabled/>
+                <input type="text" placeholder="전화번호" maxlength="12" id="Index_Input_Phonenumber" value="<%=memberPhoneNumber%>" disabled/>
                 <input type="password" placeholder="비밀번호" maxlength="20" id="Index_Input_Pw">
                 <input type="password" placeholder="비밀번호 확인" maxlength="20" id="Index_Input_Pwcheck">
 

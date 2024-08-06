@@ -18,3 +18,8 @@ const regPhone = /^\d{2,3}\d{3,4}\d{4}$/;
 const regPW = /^.{4,20}$/;
 const regId = /^.{1,20}$/;
 const regScheduleTitle = /^.{1,10}$/;
+const regMemberIdx = /^[12]$/;
+
+console.log(regMemberIdx.test(0))
+console.log(regMemberIdx.test(1))
+console.log(regMemberIdx.test(2))

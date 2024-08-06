@@ -116,7 +116,7 @@
         String ScheduleIdx = result.getString("ScheduleIdx"); 
 %>
     
-        <div class="DatePage_Schedule_Container" id="DatePage_Schedule_MyContainer" name="<%=ScheduleIdx%>">
+        <div class="DatePage_Schedule_Container" id="DatePage_Schedule_MyContainer<%=ScheduleIdx%>" name="<%=ScheduleIdx%>">
             <div>
                 <p><%=ScheduleDateTime%></p>
                 <p><%=ScheduleTitle%></p>
@@ -204,7 +204,7 @@
 <% 
     } else if (Integer.parseInt(memberIdx) == Integer.parseInt(scheduleMemberIdx)) {
 %>
-    <div class="DatePage_Schedule_Container" id="DatePage_Schedule_MyContainer">
+    <div class="DatePage_Schedule_Container" id="DatePage_Schedule_MyContainer<%=ScheduleIdx%>">
         <input value="<%=ScheduleIdx%>" type="hidden" id="Schedule_GetScheduleIdx_Input">
         <div>
             <p><%=ScheduleDateTime%></p>
