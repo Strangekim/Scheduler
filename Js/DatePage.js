@@ -8,10 +8,11 @@ var dateSelectBtn = document.getElementById("DatePage_DateSelect_Btn");
 var timeSelect = document.getElementById("DatePage_ScheduleTime_Select")
 var minuteSelect = document.getElementById("DatePage_ScheduleMinutes_Select")
 let scheduleTable = document.getElementById("Schedule_MainSchedule_Table")
+var goTodayBtn = document.getElementById("DatePage_Today_Btn")
 
 // 이전 달 마지막 날, 요일, 이번 달 마지막 날, 요일
 const beforeLast = new Date (viewYear, viewMonth, 0);
-const thisLast = new Date (viewYear, headerMonth, 0);
+const thisLast = new Date (headerYear, headerMonth, 0);
 const beforeLastDate = beforeLast.getDate();
 const beforeLastDay = beforeLast.getDay();
 const thisLastDate = thisLast.getDate();
@@ -22,7 +23,6 @@ const beforeDates = [];
 const thisDates = [...Array(thisLastDate + 1).keys()].slice(1);
 const nextDates = [];
 const scheduleDates = beforeDates.concat(thisDates, nextDates);
-
 
 // 글쓰기 창 열고 닫기
 function writeModal() {
@@ -67,35 +67,16 @@ function writeModal() {
 
 };
 
-// 지난달 마지막 요일에 토요일일 경우 추가하지 않음
-
-// function addList() {
-//     if (beforeLastDay !== 6) {
-//         for (let i = 0; i < beforeLastDay + 1; i++) {
-//             beforeDates.unshift(beforeLastDate - i);
-//         }
-//     }
-
-//     // 이번달 마지막 요일에서 필요한만큼 추가함
-
-//     for (let i = 1; i < 7 - thisLastDay; i++) {
-//         nextDates.push(i);
-//     }
-
-// };
-
 // 달력 생성 (현재는 이번달 달력만 출력)
 function createCalenderDate () {
 
     for (let i = 0; i < 5; i++){
 
         let createTr = document.createElement("tr")
-        createTr.setAttribute('id',`Schedule_ScheduleWeek_Tr${i}`)
-        
+
         for(let j = 0; j < 7; j++){
             let createTd = document.createElement("td")
             createTd.setAttribute("class", "Schedule_ScheduleDate_Td")
-            createTd.setAttribute("id", `Schedule_ScheduleDay_Tr${(i*7+j)+1}`)
             createTd.textContent = scheduleDates[i * 7 + j];
 
             createTr.appendChild(createTd);
@@ -324,6 +305,14 @@ function deleteSchedule () {
     };
 };
 
+// 오늘 버튼 이벤트
+goTodayBtn.onclick = function () {
+    if (headerGrade == 1) {
+        location.href = "./DatePage.jsp?year=" + viewYear + "&month=" + viewMonth + "&date=" + viewDay + "&grade=" + headerGrade
+        } else {
+        location.href = "./DatePage.jsp?year=" + viewYear + "&month=" + viewMonth + "&date=" + viewDay         
+        }
+}
 
 writeModal();
 createCalenderDate();

@@ -220,8 +220,6 @@
     out.print("</tr>");
     }
 
-
-
     // 팀원 스케줄 보기 버튼 활성화시
 
     else if (Integer.parseInt(grade) == 1){

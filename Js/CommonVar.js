@@ -1,3 +1,4 @@
+// url 데이터 가져오기
 const headerUrlParams = new URL(location.href).searchParams;
 const headerYear = headerUrlParams.get('year');
 const headerMonth = headerUrlParams.get('month');
@@ -12,7 +13,6 @@ const viewdate = date.getDate();
 const viewDay= date.getDay();
 
 // 정규표현식
-
 const regKor = /^[가-힣]{1,8}$/;
 const regPhone = /^\d{2,3}\d{3,4}\d{4}$/;
 const regPW = /^.{4,20}$/;
