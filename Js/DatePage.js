@@ -64,6 +64,7 @@ function writeModal() {
 
 };
 
+//todo
 // 달력 생성 , 클릭시 일일 페이지 이동
 function createCalenderDate () {
 
@@ -117,6 +118,7 @@ function dateModal () {
     }
 };
 
+//todo
 // 수정 버튼
 function fixScheduleEvent(event) {
 
