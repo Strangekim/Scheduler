@@ -7,6 +7,9 @@
 <%-- SQL 생성 및 전송 라이브러리 --%>
 <%@ page import="java.sql.PreparedStatement" %>
 
+<%@ page import="java.util.*"%>
+<%@ page import="java.util.regex.*"%>
+
 <%@ page import="java.sql.ResultSet" %>
 
     <html lang="kr">
@@ -17,7 +20,6 @@
 
 <%
 
-    request.setCharacterEncoding("utf-8");
     String nameValue = request.getParameter("name");
     String idValue = request.getParameter("id");
     String pwValue = request.getParameter("pw");
@@ -25,10 +27,22 @@
     String gradeIdxValue = request.getParameter("gradeIdx");
     String teamIdxValue = request.getParameter("teamIdx");
 
+    String regIdValue = "^.{1,20}$";
+    String regPwValue = "^.{4,20}$";
+    String regNameValue = "^[가-힣]{1,8}$";
+    String regPhoneNumberValue = "^[0-9]*$";
+    String regGradeTeamIdx = "^[12]$";
+
+    boolean regId  = Pattern.matches(regIdValue, idValue);
+    boolean regPw  = Pattern.matches(regPwValue, pwValue);
+    boolean regName  = Pattern.matches(regNameValue, nameValue);
+    boolean regPhoneNumber  = Pattern.matches(regPhoneNumberValue, phoneNumberValue);
+    boolean regGrade  = Pattern.matches(regGradeTeamIdx, gradeIdxValue);
+    boolean regTeam  = Pattern.matches(regGradeTeamIdx, teamIdxValue);   
+
+
     // 사용할 데이터베이스 설정
-    if (nameValue == null || idValue == null || pwValue == null || phoneNumberValue == null || gradeIdxValue == null
-            || nameValue.isEmpty() || idValue.isEmpty() || pwValue.isEmpty() || phoneNumberValue.isEmpty()
-            || gradeIdxValue.isEmpty() ) {
+    if (!regId || !regPw || !regName || !regPhoneNumber || !regGrade || !regTeam) {
 
 %>
         <title>회원가입 실패</title>

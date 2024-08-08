@@ -36,28 +36,31 @@
     String urlMonth = request.getParameter("month");
 
     String regGradeIdx = "^[12]$";
-    boolean regGrade = Pattern.matches(regGradeIdx, gradeIdx);
     String regMemberIdx = "^[0-9]*$";
-    boolean regMember = Pattern.matches(regMemberIdx, memberIdx);    
+    String regUrlMonth = "^(1[0-2]|[1-9])$";
+    String regUrlYear = "^\\d{4}$";
 
-    if(!regGrade|| !regMember || memberIdx == null || memberIdx.isEmpty() || gradeIdx == null || gradeIdx.isEmpty()){ 
+    boolean regGrade = Pattern.matches(regGradeIdx, gradeIdx);
+    boolean regMember = Pattern.matches(regMemberIdx, memberIdx); 
+    boolean regUrlGrade = Pattern.matches(regGradeIdx, grade);  
+    boolean regMonth = Pattern.matches(regUrlMonth, urlMonth);
+    boolean regYear = Pattern.matches(regUrlYear, urlYear);
 
-        // sy, sm 예외처리 할 것      
+    out.print(regMonth);
+
+    if(!regGrade|| !regMember || !regYear || !regMonth || !regUrlGrade || 
+    memberIdx == null || memberIdx.isEmpty() || gradeIdx == null || gradeIdx.isEmpty()){ 
+    session.invalidate();
 %>
     <script>
     alert("잘못된 접근입니다.")
     location.href="LogIn.jsp"
     </script>
 <% 
-    session.invalidate();
-
     } else {
-    
-    request.setCharacterEncoding("utf-8");
 
     Calendar cal = Calendar.getInstance();
     Calendar preCal = Calendar.getInstance();
-
 
     // 오늘 날짜
     int todayYear = cal.get(Calendar.YEAR);
@@ -68,20 +71,13 @@
     int year = Integer.parseInt(urlYear);
     int month = Integer.parseInt(urlMonth);
 
-
     cal.set(year, month - 1, 1);
     todayDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-
     int lastDay = cal.getActualMaximum(Calendar.DATE);
-
-    out.print(todayDayOfWeek);
-    out.print(lastDay);
 
     preCal.set(year, month - 2, 1);
     int lastMonthLastDay = preCal.getActualMaximum(Calendar.DATE);
-    out.print(lastMonthLastDay);
 %>
-
 
 <body>
 
@@ -172,7 +168,7 @@
     Class.forName("org.mariadb.jdbc.Driver");
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
 
-    if(grade == null) {
+    if(Integer.parseInt(grade) == 1) {
 
     // 게시글 전체 정보 받아오기 sql
     String sql = "SELECT EXTRACT(day FROM ScheduleDateTime) AS date, COUNT(*) AS ScheduleCount FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND memberIdx = ? GROUP BY DAY(ScheduleDateTime);";
@@ -242,9 +238,10 @@
 
     // 팀원 스케줄 보기 버튼 활성화시
 
-    else if (Integer.parseInt(grade) == 1 && Integer.parseInt(gradeIdx) == 2){
+    else if (Integer.parseInt(grade) == 2 && Integer.parseInt(gradeIdx) == 2){
 
-    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? ORDER BY ScheduleDateTime ASC";
+    // 게시글 전체 정보 받아오기 sql
+    String sql = "SELECT EXTRACT(day FROM ScheduleDateTime) AS date, COUNT(*) AS ScheduleCount FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? GROUP BY DAY(ScheduleDateTime);";
     PreparedStatement query = connect.prepareStatement(sql);
     
     query.setString(1, urlYear);
@@ -252,9 +249,61 @@
 
     ResultSet result = query.executeQuery();
 
-    session = request.getSession();
+    Map<Integer, Integer> scheduleCounts = new HashMap<>();
 
-    } else if (Integer.parseInt(gradeIdx) != 2) {
+    while (result.next()){
+        int scheduleDate = Integer.parseInt(result.getString("date"));
+        int scheduleCount = Integer.parseInt(result.getString("scheduleCount"));
+
+        scheduleCounts.put(scheduleDate, scheduleCount);
+    };
+
+
+    // 첫번째 주 이번달 날짜들
+   for(int i = 1; i <= 8 - todayDayOfWeek; i++){
+    int dateScheduleCount = scheduleCounts.getOrDefault(i,0);
+%>
+
+        <td class='thisMonth' data-day="<%=i%>">
+            <span class='Schedule_ScheduleDate_Span'>
+                <%=i%>
+            </span>
+            <div class='Schedule_ScheduleDate_Td'>
+                <%=dateScheduleCount%>
+            </div>    
+        </td>
+
+<%
+    }
+%>
+
+    </tr>
+    <tr>
+    
+<%
+    for(int i = 1; i <= lastDay - (8- todayDayOfWeek); i++){
+    int dateScheduleCount = scheduleCounts.getOrDefault(i+(8-todayDayOfWeek),0);
+%>
+
+        <td class='thisMonth' data-day="<%=i+(8-todayDayOfWeek)%>">
+            <span class='Schedule_ScheduleDate_Span'>
+                <%=i+(8-todayDayOfWeek)%>
+            </span>
+            <div class='Schedule_ScheduleDate_Td'>
+                <%=dateScheduleCount%>
+            </div>  
+        </td>
+
+<%
+    if(i % 7 == 0){
+%>
+
+    </tr>
+    <tr>
+
+<%
+    }}} else if (Integer.parseInt(gradeIdx) != 2) {
+        session.invalidate();
 %>
 
     <script>

@@ -113,10 +113,7 @@ createButtonsDiv.appendChild(createForthButtons)
 // 경로에 따라 나올 버튼 선택
 function headerBtnDisplay () {
 
-// var date = new Date();
-// var viewYear = date.getFullYear();
-// var viewMonth = Number(date.getMonth()) + 1;
-
+    
     // 로그인 페이지
 if (window.location.pathname == "/scheduler/LogIn.jsp") {
     createButtonsDiv.style.display = "none";
@@ -146,16 +143,15 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
         window.location.href= 'LogIn.jsp'
     }
 
-    
 
     // 스케줄 페이지
 } else if (window.location.pathname == "/scheduler/SchedulePage.jsp") {
     
-    let getGrade = document.getElementById("Schedule_GetGrade_Input").value
+    var gradeIdxGet = document.getElementById("Schedule_GetGrade_Input").value
 
     createThirdButtons.style.display = "none"; 
     
-    if(getGrade != 2){
+    if(gradeIdxGet == 1){
         createForthButtons.style.display = "none"
     }
 
@@ -168,18 +164,18 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
     }
 
     createLogoButton.onclick = function () {
-        if (headerGrade) {
-            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1; 
+        if (headerGrade == 2) {
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 2; 
             } else {
-            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1;
             }
     }
 
     createForthButtons.onclick = function () {
-        if (!headerGrade || headerGrade == null) {
-            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1;
+        if (headerGrade == 1) {
+            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 2;
         } else {
-            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth
+            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1;
         }
     }
     
@@ -194,20 +190,20 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
     createSecondButtons.value = "HOME"
 
     createSecondButtons.onclick = function () {
-        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1;
     }
 
     createLogoButton.onclick = function () {
-        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+        location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1;
     }
     
     // 일일 페이지
 
 } else if (window.location.pathname == "/scheduler/DatePage.jsp"){
 
-    let getGrade = document.getElementById("Schedule_GetGrade_Input").value
+    var gradeIdxGet = document.getElementById("Schedule_GetGrade_Input").value
 
-    if(getGrade != 2){
+    if(gradeIdxGet == 1){
         createForthButtons.style.display = "none"
     }
 
@@ -218,36 +214,35 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
     createForthButtons.value = "팀원스케줄보기"
 
     createSecondButtons.onclick = function () {
-        if (headerGrade) {
-        location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1; 
+        if (headerGrade == 2) {
+        location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 2; 
         } else {
-        location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth
+        location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1;
         }
     }
 
     createLogoButton.onclick = function () {
-        if (headerGrade) {
-            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1; 
+        if (headerGrade == 2) {
+            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 2; 
             } else {
-            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth
+            location.href = 'SchedulePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&grade=" + 1;
             }
     }
 
     createForthButtons.onclick = function () {
-        if (!headerGrade || headerGrade == null) {
-            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 1;
+        if (headerGrade == 1) {
+            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 2;
         } else {
-            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate
+            location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 1;
         }
     }
+}
 
-    }
-
-    if (headerGrade){
+    if (headerGrade == 2){
         createForthButtons.style.background = "red";
     } else if (window.location.pathname == "/scheduler/DatePage.jsp"){
-        let getGrade = document.getElementById("Schedule_GetGrade_Input").value
-        if(getGrade != 2){
+
+        if(gradeIdxGet == 1){
             createForthButtons.style.display = "none"
         }
         createThirdButtons.style.display = "none";
@@ -256,23 +251,24 @@ if (window.location.pathname == "/scheduler/LogIn.jsp") {
         createForthButtons.value = "팀원스케줄보기"
 
         createSecondButtons.onclick = function () {
-            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1;
         }
         createLogoButton.onclick = function () {
             console.log(createLogoButton)
-            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth
+            location.href = 'SchedulePage.jsp?year=' + viewYear + "&month=" + viewMonth + "&grade=" + 1;
         }
         createForthButtons.onclick = function () {
-            if (!headerGrade || headerGrade == null) {
-                location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 1;
+            if (headerGrade == 1) {
+                location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 2;
             } else {
-                location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate
+                location.href = 'DatePage.jsp?year=' + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + 1;
             }
         }
     }
-    if (headerGrade){
+    if (headerGrade == 2){
         createForthButtons.style.background = "red";
     }
+    
 };
 
 headerBtnDisplay();

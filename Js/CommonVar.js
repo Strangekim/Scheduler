@@ -19,7 +19,8 @@ const regPW = /^.{4,20}$/;
 const regId = /^.{1,20}$/;
 const regScheduleTitle = /^.{1,10}$/;
 const regMemberIdx = /^[12]$/;
+const regYear = /^\d{4}$/;
 
-console.log(regMemberIdx.test(0))
-console.log(regMemberIdx.test(1))
-console.log(regMemberIdx.test(2))
+console.log(regYear.test("ㄱ"))
+console.log(regYear.test(199))
+console.log(regYear.test(2500))

@@ -13,27 +13,10 @@
 <%@ page import="java.util.Calendar"%>
 
 <%@ page import="java.util.*"%>
+<%@ page import="java.util.regex.*"%>
 
 <%@ page import="java.sql.Timestamp"%>
 
-<%  
-    request.setCharacterEncoding("utf-8");
-    
-    session = request.getSession();
-
-    String gradeIdx = (String) session.getAttribute("gradeIdx");
-    String memberIdx = (String) session.getAttribute("memberIdx");
-
-    String year = request.getParameter("year");
-    String month = request.getParameter("month");
-    String date = request.getParameter("date");
-    String grade = request.getParameter("grade");
-
-    Class.forName("org.mariadb.jdbc.Driver");
-
-    // DB 통신 연결
-    Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
-%>
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -45,35 +28,56 @@
     <link rel="stylesheet" type="text/css" href="Css/DatePage.css">
 
 </head>
-<body>
-    <input value="<%=gradeIdx%>" type="hidden" id="Schedule_GetGrade_Input">
 
-<%
+<%  
 
-    if (year == null || month == null || date == null || memberIdx == null || gradeIdx == null
-    || year.isEmpty() || month.isEmpty() || date.isEmpty() || memberIdx.isEmpty() || gradeIdx.isEmpty()){ 
+    String gradeIdx = (String) session.getAttribute("gradeIdx");
+    String memberIdx = (String) session.getAttribute("memberIdx");
 
+    String year = request.getParameter("year");
+    String month = request.getParameter("month");
+    String date = request.getParameter("date");
+    String grade = request.getParameter("grade");
+
+    String regGradeIdx = "^[12]$";
+    String regMemberIdx = "^[0-9]*$";
+    String regUrlMonth = "^(1[0-2]|[1-9])$";
+    String regUrlYear = "^\\d{4}$";
+    String regUrlDate = "^(3[01]|2[0-9]|1[0-9]|0[1-9]|[1-9])$";
+
+    boolean regGrade = Pattern.matches(regGradeIdx, gradeIdx);
+    boolean regMember = Pattern.matches(regMemberIdx, memberIdx);
+    boolean regDate = Pattern.matches(regUrlDate, date);
+    boolean regMonth = Pattern.matches(regUrlMonth, month);
+    boolean regYear = Pattern.matches(regUrlYear, year);
+
+    if (!regGrade || !regMember || !regDate || !regMonth || !regYear){ 
+
+    session.invalidate();   
 %>
 
     <script>
     alert("잘못된 접근입니다.")
-    history.back();
+    location.href="LogIn.jsp"
     </script>
 
 <% 
-    } else if (grade == null || grade.isEmpty()) {
-    // 해당 날짜의 스케줄 정보 받아오기 sql
-    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND DAY(ScheduleDateTime) = ? AND memberIdx = ? ORDER BY ScheduleDateTime ASC";
-    PreparedStatement query = connect.prepareStatement(sql);
-    
-    query.setString(1, year);
-    query.setString(2, month);
-    query.setString(3, date);
-    query.setString(4, memberIdx);
+    }
+    if (Integer.parseInt(gradeIdx) == 1 && Integer.parseInt(grade) == 2) {
+%>
+    <script>
+    alert("잘못된 접근입니다.")
+    location.href="LogIn.jsp"
+    </script>
 
-    ResultSet result = query.executeQuery();
-    
-%> 
+<%
+    }
+%>
+
+<body>
+
+    <input value="<%=gradeIdx%>" type="hidden" id="Schedule_GetGrade_Input">
+
     <div id="DatePage_Main_Container">
         <div id="DatePage_Main_MenuContainer">
             <div>
@@ -99,9 +103,11 @@
         </div>
 
         <div id="DatePage_SelectDay_Container">
+
             <div id="DatePage_CloseSelectDay_Container">
                 <button id="DatePage_CloseSelectDay_Btn">X</button>
             </div>
+
             <table border="1" id="Schedule_MainSchedule_Table">
 
             </table> 
@@ -109,7 +115,21 @@
 
 
 <%
+    Class.forName("org.mariadb.jdbc.Driver");
+    Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
 
+    if (Integer.parseInt(grade) == 1) {
+    // 해당 날짜의 스케줄 정보 받아오기 sql
+    String sql = "SELECT * FROM Schedule WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND DAY(ScheduleDateTime) = ? AND memberIdx = ? ORDER BY ScheduleDateTime ASC";
+    PreparedStatement query = connect.prepareStatement(sql);
+    
+    query.setString(1, year);
+    query.setString(2, month);
+    query.setString(3, date);
+    query.setString(4, memberIdx);
+
+    ResultSet result = query.executeQuery();
+    
     while (result.next()) {
         String ScheduleDateTime = result.getString("ScheduleDateTime");
         String ScheduleTitle = result.getString("ScheduleTitle");
@@ -130,7 +150,7 @@
 
 <%
 
-    }} else if (Integer.parseInt(grade) == 1) {
+    }} else if (Integer.parseInt(grade) == 2) {
 
     String sql = "SELECT * FROM Schedule JOIN Member ON Schedule.memberIdx = Member.memberIdx WHERE YEAR(ScheduleDateTime) = ? AND MONTH(ScheduleDateTime) = ? AND DAY(ScheduleDateTime) = ? ORDER BY ScheduleDateTime ASC";
 
@@ -141,44 +161,6 @@
     query.setString(3, date);
 
     ResultSet result = query.executeQuery();
-
-%>
-
-    <div id="DatePage_Main_Container">
-        <div id="DatePage_Main_MenuContainer">
-            <div>
-                <button id="DatePage_Today_Btn">오늘</button>
-            </div>
-
-            <div>
-                <button onclick="beforeDayEvent()">&lt;</button>
-
-                <button id="DatePage_DateSelect_Btn">
-                    <div id="DatePage_DateView_Container">
-                        <p id="DatePage_DateViewYear_P"><%=year%></p>
-                        <p id="DatePage_DateViewDate_P"><%=month%>월<%=date%>일</p>
-                    </div>
-                </button>
-                
-                <button onclick="afterDayEvent()">&gt;</button>
-            </div>
-
-            <div>
-                <button id="DatePage_Write_Btn">글쓰기</button>
-            </div>
-        </div>
-
-        <div id="DatePage_SelectDay_Container">
-            <div id="DatePage_CloseSelectDay_Container">
-                <button id="DatePage_CloseSelectDay_Btn">X</button>
-            </div>
-            <table border="1" id="Schedule_MainSchedule_Table">
-
-            </table> 
-        </div>
-
-
-<%
 
     while (result.next()) {
         String ScheduleDateTime = result.getString("ScheduleDateTime");
@@ -217,7 +199,7 @@
         </div>
     </div>
 <%
-    }}}
+    }}}; 
 %>
 
 <%-- 글쓰기 모달창 --%>

@@ -7,19 +7,9 @@
 <%-- SQL 생성 및 전송 라이브러리 --%>
 <%@ page import="java.sql.PreparedStatement" %>
 
-<%
-    request.setCharacterEncoding("utf-8");
-    String scheduleDatetime = request.getParameter("scheduleDatetime");
-    String title = request.getParameter("title");
-    String year = request.getParameter("year");
-    String month = request.getParameter("month");
-    String date = request.getParameter("date");
-
-
-    // 작성자 idx 받아오기
-    String memberIdx = (String) session.getAttribute("memberIdx");
-    // String teamIdx = (String) session.getAttribute("teamIdx");
-%>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.*"%>
+<%@ page import="java.util.regex.*"%>
 
 <html lang="kr">
 <head>
@@ -29,12 +19,25 @@
 </head>
 <body>
 
-<% 
-    if (scheduleDatetime == null || title.isEmpty() || title == null ) {
+<%
+    String memberIdx = (String) session.getAttribute("memberIdx");
+
+    String scheduleDatetime = request.getParameter("scheduleDatetime");
+    String title = request.getParameter("title");
+
+    String regMemberIdx = "^[0-9]*$";
+    String regScheduleDateTimeValue = "\\d{4}-(1[0-2]|[1-9])-(3[01]|2[0-9]|1[0-9]|0[1-9]|[1-9]) ([0-9]|1[0-9]|2[0-4]):([0-9]|[0-5][0-9]):(0[1-9]|[0-5][0-9])";
+    String regTitleValue = "^.{1,10}$";
+
+    boolean regMember = Pattern.matches(regMemberIdx, memberIdx);
+    boolean regScheduleDateTime = Pattern.matches(regScheduleDateTimeValue, scheduleDatetime);
+    boolean regTitle = Pattern.matches(regTitleValue, title);
+
+    if (!regMember || !regTitle || !regScheduleDateTime) {
 %>
 
     <script>
-    alert("스케줄 작성 완료")
+    alert("스케줄 작성 실패")
     history.back()
     </script>
 
@@ -67,8 +70,6 @@
     // SQL 전송
 
     query.executeUpdate();
-
-    
 %>
     <script>
     alert("스케줄 작성 완료")

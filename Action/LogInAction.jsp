@@ -9,6 +9,9 @@
 
 <%@ page import="java.sql.ResultSet" %>
 
+<%@ page import="java.util.*"%>
+<%@ page import="java.util.regex.*"%>
+
 <%@ page import="java.time.LocalDate" %>
 
 
@@ -21,12 +24,15 @@
 
 <%
 
-    request.setCharacterEncoding("utf-8");
     String idValue = request.getParameter("id");
     String pwValue = request.getParameter("pw");
 
-    if (idValue == null || idValue.isEmpty() || pwValue == null || pwValue.isEmpty())
-    {
+    String regIdPwValue = "^.{1,20}$";
+
+    boolean regId  = Pattern.matches(regIdPwValue, idValue);
+    boolean regPw  = Pattern.matches(regIdPwValue, pwValue);
+
+    if (!regId || !regPw) {
 
 %>
         <title>로그인 실패</title>
@@ -71,7 +77,7 @@
 %>
     <title>로그인 성공</title>
     <script>
-        location.href = "../SchedulePage.jsp?year=" + <%=year%> + "&month=" + <%=month%>// 로그인 성공 후 이동할 페이지 지정
+        location.href = "../SchedulePage.jsp?year=" + <%=year%> + "&month=" + <%=month%> + "&grade=" + "1" // 로그인 성공 후 이동할 페이지 지정
     </script>
 
 <%

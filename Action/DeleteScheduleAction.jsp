@@ -6,15 +6,9 @@
 <%@ page import="java.sql.Connection" %>
 <%-- SQL 생성 및 전송 라이브러리 --%>
 <%@ page import="java.sql.PreparedStatement" %>
-
-<%
-    request.setCharacterEncoding("utf-8");
-    String scheduleIdx = request.getParameter("scheduleIdx");
-
-    // 작성자 idx 받아오기
-    String memberIdx = (String) session.getAttribute("memberIdx");
-    // String teamIdx = (String) session.getAttribute("teamIdx");
-%>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.*"%>
+<%@ page import="java.util.regex.*"%>
 
 <html lang="kr">
 <head>
@@ -22,10 +16,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>스케줄 삭제</title>
 </head>
-<body>
+
+
+<%
+    String memberIdx = (String) session.getAttribute("memberIdx");
+
+    String scheduleIdx = request.getParameter("scheduleIdx");
+    String regScheduleIdxValue = "^[0-9]*$";
+
+    boolean regScheduleIdx = Pattern.matches(regScheduleIdxValue, scheduleIdx);
+    boolean regMemberIdx = Pattern.matches(regScheduleIdxValue, memberIdx);
+
+    if(!regScheduleIdx || !regMemberIdx) {    
+%>
+    <script>
+    alert("스케줄 삭제 실패")
+    history.back()
+    </script>
 
 <% 
-    if (scheduleIdx == null || scheduleIdx.isEmpty()) {
+    } else if (scheduleIdx == null || scheduleIdx.isEmpty()) {
 %>
 
     <script>
@@ -33,13 +43,18 @@
     history.back()
     </script>
 
-<% } else {
-
+<% } 
     Class.forName("org.mariadb.jdbc.Driver");
-
-    // DB 통신 연결
     Connection connect = DriverManager.getConnection("jdbc:mariadb://localhost:3306/mySchedulePage","stageus","1234");
+    String checkMember = "SELECT * FROM Schedule WHERE memberIdx = ? AND ScheduleIdx = ?";
+    PreparedStatement checkMemberQuery = connect.prepareStatement(checkMember);
 
+    checkMemberQuery.setString(1, memberIdx);
+    checkMemberQuery.setString(2, scheduleIdx);
+
+    ResultSet checkMemberResult = checkMemberQuery.executeQuery(); 
+
+    if(checkMemberResult.next()) {
     //SQL 준비
     String sql = "DELETE FROM Schedule WHERE ScheduleIdx = ?";
 
@@ -60,7 +75,15 @@
     </script>
 
 <%
+    } else {
+%>
+    <title>스케줄 삭제 실패</title>
+    <script>
+        alert("본인의 스케줄이 아닙니다.")
+        history.back(); 
+    </script>
+<%
     }
 %>
-</body>
+
 </html>

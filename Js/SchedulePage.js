@@ -59,11 +59,8 @@ function decreaseMonthEvent () {
         decreaseYear = decreaseYear - 1
         decreaseMonth = 12;
     }
-    if (headerGrade) {
         location.href = "./SchedulePage.jsp?year=" + decreaseYear + "&month=" + decreaseMonth + "&grade=" + headerGrade
-    } else {
-        location.href = "./SchedulePage.jsp?year=" + decreaseYear + "&month=" + decreaseMonth
-    }
+
 }
 function increaseMonthEvent () {
     var increaseMonth = Number(headerMonth);
@@ -105,16 +102,13 @@ function setDatePageEvent(e) {
     }
     var date = target.getAttribute("data-day");
 
-    if(headerGrade){
     location.href = "./DatePage.jsp?year=" + headerYear + "&month=" + headerMonth + "&date=" + date + "&grade=" + headerGrade
-    } else {
-    location.href = "./DatePage.jsp?year=" + headerYear + "&month=" + headerMonth + "&date=" + date       
-    }
+
 }
 
 // 월 선택 영역
 function changeMonthEvent(e) {
-    location.href = "./SchedulePage.jsp?year=" + selectYearBtn.innerHTML + "&month=" + e 
+    location.href = "./SchedulePage.jsp?year=" + selectYearBtn.innerHTML + "&month=" + e + "&grade=" + headerGrade
 }
 
 seleectMonthModal();

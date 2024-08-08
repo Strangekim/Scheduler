@@ -200,11 +200,7 @@ function fixScheduleEvent(event) {
     }
 
     createFixButtons2.onclick = function () {
-        if (headerGrade) {
             location.href = "./DatePage.jsp?year=" + headerYear + "&month=" + headerMonth + "&date=" + headerDate + "&grade=" + headerGrade        
-        } else {
-            location.href = "./DatePage.jsp?year=" + headerYear + "&month=" + headerMonth + "&date=" + headerDate
-        }
     }
 };
 

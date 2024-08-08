@@ -9,15 +9,15 @@
 
 <%@ page import="java.sql.ResultSet" %>
 
-    <html lang="kr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원정보변경</title>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원정보변경</title>
+</head>
 
-    </head>
+
 <%
-
     request.setCharacterEncoding("utf-8");
     String idValue = request.getParameter("id");
     String pwValue = request.getParameter("pw");
